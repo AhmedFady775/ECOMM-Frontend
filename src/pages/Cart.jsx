@@ -41,7 +41,7 @@ function Cart() {
 
   return (
     <>
-      <div className="flex flex-col items-center min-h-[100vh]  p-4">
+      <div className="flex flex-col items-center min-h-[60vh]  p-4">
         <section className="flex flex-row border-b-2 border-gray-100 pb-4 w-full">
           <Link to="/">Home</Link> <KeyboardArrowRight />{" "}
           <Link to="/shop">Shop</Link>
