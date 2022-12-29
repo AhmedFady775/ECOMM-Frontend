@@ -41,7 +41,7 @@ function Cart() {
 
   return (
     <>
-      <div className="flex flex-col items-center min-h-[60vh]  p-4">
+      <div className="flex flex-col items-center min-h-[100vh] p-4">
         <section className="flex flex-row border-b-2 border-gray-100 pb-4 w-full">
           <Link to="/">Home</Link> <KeyboardArrowRight />{" "}
           <Link to="/shop">Shop</Link>
@@ -49,7 +49,7 @@ function Cart() {
           <strong>Cart</strong>
         </section>
         {cartItems.length === 0 ? (
-          <div className="flex flex-col items-center mt-20">
+          <div className="flex flex-col items-center  mt-20">
             <img src={CartEmpty} alt="Cart" width={"300px"} />
             <p className="text-2xl py-8 font-semibold">Your Cart is empty.</p>
             <Link to="/shop">
