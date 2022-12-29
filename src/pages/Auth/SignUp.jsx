@@ -13,6 +13,8 @@ export default function SignUp() {
   const redirect = redirectInUrl ? redirectInUrl : "/";
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -30,8 +32,7 @@ export default function SignUp() {
       const { data } = await Axios.post(
         "https://ecomm-i8yz.onrender.com/auth/register",
         {
-          firstName,
-          lastName,
+          name,
           email,
           password,
         }
@@ -59,18 +60,11 @@ export default function SignUp() {
             <input
               placeholder="First name"
               className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
-          <div className="flex flex-col p-2 border-b-2  border-slate-600 mb-8">
-            <input
-              placeholder="Second name"
-              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
-          </div>
+
           <div className="flex flex-col p-2 border-b-2  border-slate-600 mb-8">
             <input
               className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
