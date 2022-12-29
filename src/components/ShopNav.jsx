@@ -127,6 +127,9 @@ function ShopNav() {
             )}
             <Link to="/cart" className="pl-4">
               <ShoppingCartIcon />
+              <div className="absolute top-[20%] right-[3%] bg-red-500 rounded-full flex justify-center items-center text-xs h-5 w-5">
+                {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+              </div>
             </Link>
           </div>
         </div>
