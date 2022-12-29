@@ -38,7 +38,7 @@ export default function OrderScreen() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          `http://localhost:3001/orders/${orderId}`,
+          `https://ecomm-i8yz.onrender.com//orders/${orderId}`,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }
