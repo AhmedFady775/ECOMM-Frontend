@@ -23,7 +23,7 @@ export default function SignIn() {
     e.preventDefault();
     try {
       const { data } = await Axios.post(
-        "https://ecomm-i8yz.onrender.com//auth/login",
+        "https://ecomm-i8yz.onrender.com/auth/login",
         {
           email,
           password,

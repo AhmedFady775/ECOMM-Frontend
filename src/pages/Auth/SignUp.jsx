@@ -28,7 +28,7 @@ export default function SignUp() {
     }
     try {
       const { data } = await Axios.post(
-        "https://ecomm-i8yz.onrender.com//auth/register",
+        "https://ecomm-i8yz.onrender.com/auth/register",
         {
           firstName,
           lastName,

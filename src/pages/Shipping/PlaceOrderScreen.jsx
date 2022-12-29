@@ -44,7 +44,7 @@ export default function PlaceOrderScreen() {
       dispatch({ type: "CREATE_REQUEST" });
 
       const { data } = await axios.post(
-        "https://ecomm-i8yz.onrender.com//orders/create",
+        "https://ecomm-i8yz.onrender.com/orders/create",
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,

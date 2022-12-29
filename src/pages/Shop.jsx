@@ -63,7 +63,7 @@ function Shop() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get(
-          "https://ecomm-i8yz.onrender.com//products"
+          "https://ecomm-i8yz.onrender.com/products"
         );
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
