@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.inputCont {
+  @apply flex flex-col w-full;
+}
+
+.inputContRadio {
+  @apply flex flex-row w-full;
+}
+
+.inputlabel {
+  @apply font-semibold mb-2;
+}
+
+.input {
+  @apply rounded p-2 mb-4;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+.card {
+  @apply flex justify-center items-center w-full bg-white min-h-[400px];
+}
+
+.dropDown {
+  @apply flex p-2 hover:bg-slate-300 w-full font-semibold;
+}
+
+.nav-item {
+  width: fit-content;
+}
+
+.nav-item .active {
+  color: rgb(139 92 246);
+  padding-bottom: 6px;
+  border-bottom-width: 2px;
+  border-color: rgb(139 92 246);
+}
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #949494;
+  color: #a0a0a0;
+  width: 100%;
+}
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid #21b69d;
+  color: #21b69d;
+  width: 100%;
+}
+
+.checkout-steps {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  padding: 1rem 0rem;
+  width: 90%;
+}
+
+.placeOrderHeader {
+  @apply my-2 text-slate-500;
+}
+
+.placeOrderCont {
+  display: flex;
+  flex-direction: column;
+  @apply border-b-2 pb-4;
+}
+
+.placeOrderItems {
+  text-decoration: none;
+}
+
+.wholeOrderItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  border: 1px solid #dadce0;
+  border-radius: 7px;
+  justify-content: space-around;
+  margin: 1rem 0rem;
+  width: 100%;
+}
+
+.wholeOrderItem .orderItemPart {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.orderItemPart {
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.placeOrderHeaders {
+  padding-bottom: 1rem;
+  color: #21b69d;
+}
+
+.ImportantOne {
+  margin: 1rem 0rem;
+}
