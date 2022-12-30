@@ -12,6 +12,12 @@ import ShippingAddressScreen from "./pages/Shipping/ShippingAddressScreen";
 import OrderScreen from "./pages/Shipping/OrderScreen";
 import PaymentMethodScreen from "./pages/Shipping/PaymentMethodScreen";
 import PlaceOrderScreen from "./pages/Shipping/PlaceOrderScreen";
+import Payments from "./pages/User/Payments";
+import Profile from "./pages/User/Profile";
+import OrdersHistory from "./pages/User/OrdersHistory";
+import Return from "./pages/User/Return";
+import ProtectedRoute from "./components/ProtoctedRoute";
+
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
@@ -49,13 +55,42 @@ const App = () => {
       <div>
         <ShopNav />
         <Routes>
-          {/* <Route path="/editposts/:id" element={<EditProduct />} />
-          <Route path="/orderhistory" element={<OrderHistoryScreen />}></Route> */}
+          <Route
+            path="/user/returns"
+            element={
+              <ProtectedRoute>
+                <Return />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user/payments"
+            element={
+              <ProtectedRoute>
+                <Payments />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user/ordershistory"
+            element={
+              <ProtectedRoute>
+                <OrdersHistory />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
           <Route path="/:id" element={<ProductScreen />} />
           <Route path="shop" element={<Shop />} />
           <Route path="/Cart" element={<Cart />} />
-          {/* <Route path="/AccountDetails" element={<AccountDetails />} /> */}
           <Route path="/payment" element={<PaymentMethodScreen />}></Route>
           <Route path="/placeorder" element={<PlaceOrderScreen />} />
           <Route path="/order/:id" element={<OrderScreen />}></Route>

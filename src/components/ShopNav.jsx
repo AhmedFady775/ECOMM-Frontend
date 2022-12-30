@@ -115,10 +115,18 @@ function ShopNav() {
                     <PersonIcon />
                     {isHovering && (
                       <div className="flex flex-col bg-white text-black absolute top-[55px] right-[10px] lg:right-[140px] rounded py-2 w-[150px] shadow z-10">
-                        <div className="dropDown"> Profile </div>
-                        <div className="dropDown"> Orders </div>
-                        <div className="dropDown"> Payments </div>
-                        <div className="dropDown"> Returns </div>
+                        <Link to="/user/profile" className="dropDown">
+                          Profile
+                        </Link>
+                        <Link to="/user/ordershistory" className="dropDown">
+                          Orders{" "}
+                        </Link>
+                        <Link to="/user/payments" className="dropDown">
+                          Payments{" "}
+                        </Link>
+                        <Link to="/user/returns" className="dropDown">
+                          Returns{" "}
+                        </Link>
                         <div
                           onClick={signoutHandler}
                           className="flex justify-center pt-2 hover:text-slate-400 border-slate-300 border-t-[1px] text-sm text-slate-500"
