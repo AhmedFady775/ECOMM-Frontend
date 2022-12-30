@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import Navbar from "../src/components/navbar";
-import Navbar1 from "./components/navbar1";
+import { ToastContainer } from "react-toastify";
 import Footer from "./components/footer";
 import Home from "./pages/Home";
 import SignIn from "./pages/Auth/SignIn";
@@ -13,6 +12,7 @@ import ShippingAddressScreen from "./pages/Shipping/ShippingAddressScreen";
 import OrderScreen from "./pages/Shipping/OrderScreen";
 import PaymentMethodScreen from "./pages/Shipping/PaymentMethodScreen";
 import PlaceOrderScreen from "./pages/Shipping/PlaceOrderScreen";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const location = useLocation();
@@ -60,6 +60,7 @@ const App = () => {
           <Route path="/placeorder" element={<PlaceOrderScreen />} />
           <Route path="/order/:id" element={<OrderScreen />}></Route>
         </Routes>
+        <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
         <Footer />
       </div>
     );
@@ -72,7 +73,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>
-      {/* <ToastContainer position="bottom-center" limit={1} autoClose={2000} /> */}
+      <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
     </div>
   );
 };

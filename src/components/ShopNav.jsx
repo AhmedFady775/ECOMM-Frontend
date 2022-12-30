@@ -8,10 +8,7 @@ import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { Drawer } from "@mui/material";
 import { Store } from "../components/Store";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import V2S from "../assets/V2S.png";
 import CloseIcon from "@mui/icons-material/Close";
-import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 
 function ShopNav() {
   const [isHovering, setIsHovering] = useState(false);
@@ -46,26 +43,35 @@ function ShopNav() {
             <li className="nav-item">
               <NavLink
                 onClick={toggleDrawer(false)}
-                to="shop"
+                to="/"
                 className={(navData) => (navData.isActive ? "active" : null)}
               >
-                Shop
+                Home
               </NavLink>
             </li>
-            <li>
-              <CloseIcon onClick={toggleDrawer(false)} sx={{ fontSize: 30 }} />
-            </li>
+            <CloseIcon onClick={toggleDrawer(false)} sx={{ fontSize: 30 }} />
           </ul>
-
           <li className="nav-item">
             <NavLink
               onClick={toggleDrawer(false)}
-              to="/signin"
+              to="shop"
               className={(navData) => (navData.isActive ? "active" : null)}
             >
-              Sign in
+              Shop
             </NavLink>
           </li>
+          {userInfo ? null : (
+            <li className="nav-item">
+              <NavLink
+                onClick={toggleDrawer(false)}
+                to="/signin"
+                className={(navData) => (navData.isActive ? "active" : null)}
+              >
+                Sign in
+              </NavLink>
+            </li>
+          )}
+
           <li className="nav-item">
             <NavLink
               onClick={toggleDrawer(false)}
@@ -87,9 +93,14 @@ function ShopNav() {
     <nav className="flex p-5 lg:px-32 flex-col bg-black  text-white top-0 sticky z-50">
       <section className="flex flex-row items-center justify-between ">
         <div className="flex flex-row items-center">
-          <Link className="flex" to="/">
-            <img src={V2S} width={"60px"} />
-          </Link>
+          <MenuIcon
+            onClick={toggleDrawer(true)}
+            className="mr-4"
+            sx={{ fontSize: 30 }}
+          />
+          <Drawer open={open} anchor="left" onClose={toggleDrawer(false)}>
+            {list()}
+          </Drawer>
         </div>
         <div className="flex flex-row items-center">
           <SearchIcon />
@@ -103,7 +114,7 @@ function ShopNav() {
                   <div className="flex flex-row">
                     <PersonIcon />
                     {isHovering && (
-                      <div className="flex flex-col bg-white text-black absolute top-[55px] right-[40px] lg:right-[140px] rounded py-2 w-[150px] shadow z-10">
+                      <div className="flex flex-col bg-white text-black absolute top-[55px] right-[10px] lg:right-[140px] rounded py-2 w-[150px] shadow z-10">
                         <div className="dropDown"> Profile </div>
                         <div className="dropDown"> Orders </div>
                         <div className="dropDown"> Payments </div>
@@ -118,14 +129,13 @@ function ShopNav() {
                     )}
                   </div>
                 </div>
-                <FavoriteIcon />
               </div>
             ) : (
               <Link to="/signin" className="pl-4">
                 <PersonIcon />
               </Link>
             )}
-            <Link to="/cart" className="pl-4">
+            <Link to="/cart">
               <ShoppingCartIcon />
               <div className="absolute top-[20%] right-[3%] bg-red-500 rounded-full flex justify-center items-center text-xs h-5 w-5">
                 {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}

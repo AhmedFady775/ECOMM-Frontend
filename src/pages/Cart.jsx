@@ -8,7 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteIcon from "@mui/icons-material/Delete";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { useState } from "react";
+import { toast } from "react-toastify";
 
 function Cart() {
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ function Cart() {
 
   const removeItemHandler = (item) => {
     ctxDispatch({ type: "CART_REMOVE_ITEM", payload: item });
+    toast.success("Item deleted");
   };
 
   const checkoutHandler = () => {

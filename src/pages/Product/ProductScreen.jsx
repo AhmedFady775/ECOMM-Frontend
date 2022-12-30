@@ -6,6 +6,7 @@ import { Store } from "../../components/Store";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { toast } from "react-toastify";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -44,6 +45,7 @@ function ProductScreen() {
       type: "CART_ADD_ITEM",
       payload: { ...product, quantity },
     });
+    toast.success("Added to cart");
   };
 
   useEffect(() => {

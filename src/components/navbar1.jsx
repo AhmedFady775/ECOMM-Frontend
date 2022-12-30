@@ -40,16 +40,16 @@ function Navbar1() {
 
   const list = () => (
     <div className="w-[80vw] h-full bg-[f7f7f7]">
-      <section className="flex-col flex px-6 py-10 text-black space-y-6  text-xl font-medium">
+      <section className="flex-col flex px-6 py-10 text-black space-y-6 text-xl font-medium">
         <ul className="flex flex-col text-black space-y-8">
           <ul className="flex felx-row justify-between">
             <li className="nav-item">
               <NavLink
                 onClick={toggleDrawer(false)}
-                to="shop"
+                to="/"
                 className={(navData) => (navData.isActive ? "active" : null)}
               >
-                Shop
+                Home
               </NavLink>
             </li>
             <li>
@@ -60,12 +60,25 @@ function Navbar1() {
           <li className="nav-item">
             <NavLink
               onClick={toggleDrawer(false)}
-              to="/signin"
+              to="shop"
               className={(navData) => (navData.isActive ? "active" : null)}
             >
-              Sign in
+              Shop
             </NavLink>
           </li>
+
+          {userInfo ? null : (
+            <li className="nav-item">
+              <NavLink
+                onClick={toggleDrawer(false)}
+                to="/signin"
+                className={(navData) => (navData.isActive ? "active" : null)}
+              >
+                Sign in
+              </NavLink>
+            </li>
+          )}
+
           <li className="nav-item">
             <NavLink
               onClick={toggleDrawer(false)}
@@ -83,36 +96,6 @@ function Navbar1() {
     </div>
   );
 
-  const navs = [
-    {
-      name: "CATEGORIES",
-      navlink: "/categories",
-      navlinks: [
-        "Cameras",
-        "Wires",
-        "Books",
-        "Deals",
-        "Tv",
-        "Phone",
-        "Mobile",
-        "Kitchen",
-      ],
-    },
-    {
-      name: "SALE",
-      navlink: "/categories",
-      navlinks: [
-        "Cameras",
-        "Wires",
-        "Books",
-        "Deals",
-        "Tv",
-        "Phone",
-        "Mobile",
-        "Kitchen",
-      ],
-    },
-  ];
   return (
     <nav className="flex p-5 lg:px-32 flex-col bg-black  text-white top-0 sticky z-50">
       <section className="flex flex-row items-center justify-between ">
@@ -126,17 +109,6 @@ function Navbar1() {
               {list()}
             </Drawer>
           </span>
-
-          <section className="lg:flex flex-row pl-10 hidden">
-            {navs.map((index) => (
-              <NavLink
-                name={index.name}
-                navlinks={index.navlinks}
-                className="px-2"
-              />
-            ))}
-            <span className="px-2 cursor-pointer">ABOUT</span>
-          </section>
         </div>
         <div className="hidden lg:flex flex-row items-center">
           <SearchIcon />

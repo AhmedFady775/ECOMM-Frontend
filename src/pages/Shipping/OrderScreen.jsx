@@ -106,7 +106,7 @@ export default function OrderScreen() {
                 <div className="orderItemPart">
                   <Link
                     className="text-blue-400 underline"
-                    to={`/product/${order.slug}`}
+                    to={`/${order._id}`}
                   >
                     <div className="p-2">
                       <img
@@ -120,7 +120,7 @@ export default function OrderScreen() {
                 <div className="orderItemPart">
                   <Link
                     className="text-blue-400 underline"
-                    to={`/product/${order.slug}`}
+                    to={`/${order._id}`}
                   >
                     {order.name}
                   </Link>

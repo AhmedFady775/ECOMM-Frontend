@@ -141,7 +141,7 @@ export default function PlaceOrderScreen() {
                     <div className="orderItemPart">
                       <Link
                         className="text-blue-400 underline"
-                        to={`/product/${item.codeName}`}
+                        to={`/${item._id}`}
                       >
                         <div className="p-2">
                           <img
@@ -155,7 +155,7 @@ export default function PlaceOrderScreen() {
                     <div className="orderItemPart">
                       <Link
                         className="text-blue-400 underline"
-                        to={`/product/${item.codeName}`}
+                        to={`/${item._id}`}
                       >
                         {item.name}
                       </Link>
