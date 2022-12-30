@@ -131,7 +131,7 @@ function ShopNav() {
                 </div>
               </div>
             ) : (
-              <Link to="/signin" className="pl-4">
+              <Link to="/signin" className="px-4">
                 <PersonIcon />
               </Link>
             )}

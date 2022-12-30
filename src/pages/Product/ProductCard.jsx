@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function ProductsCard({ product }) {
   return (
-    <div className="flex flex-col lg:w-96 w-44 bg-white p-2 rounded-md justify-between">
+    <div className="flex flex-col w-fit lg:w-96 bg-white rounded-md">
       <Link className="flex" to={`/${product._id}`}>
         <img
           className="w-40 h-40 lg:w-80 lg:h-80 object-cover"

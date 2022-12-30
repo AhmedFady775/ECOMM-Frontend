@@ -80,7 +80,7 @@ function Shop() {
       ) : error ? (
         <div> {error}</div>
       ) : (
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col ">
           <section className="border-b-2 border-gray-100 pb-4">
             <Link to="/">Home</Link> <KeyboardArrowRight />{" "}
             <strong>Shop</strong>
