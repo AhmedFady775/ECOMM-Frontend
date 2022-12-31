@@ -4,16 +4,11 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.css";
 import { StoreProvider } from "./components/Store";
-import { QueryClient, QueryClientProvider } from "react-query";
-
-const queryClient = new QueryClient();
 
 ReactDOM.render(
   <BrowserRouter>
     <StoreProvider>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
+      <App />
     </StoreProvider>
   </BrowserRouter>,
   document.getElementById("root")

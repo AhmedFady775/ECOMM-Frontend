@@ -13,7 +13,6 @@ export default function SignUp() {
   const redirect = redirectInUrl ? redirectInUrl : "/shop";
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [name, setName] = useState("");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,14 +28,12 @@ export default function SignUp() {
       return;
     }
     try {
-      const { data } = await Axios.post(
-        "https://ecomm-i8yz.onrender.com/auth/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const { data } = await Axios.post("http://localhost:3001/auth/register", {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate(redirect || "/shop");
@@ -60,7 +57,16 @@ export default function SignUp() {
             <input
               placeholder="First name"
               className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col p-2 border-b-2  border-slate-600 mb-8">
+            <input
+              placeholder="Last name"
+              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
+              onChange={(e) => setLastName(e.target.value)}
               required
             />
           </div>

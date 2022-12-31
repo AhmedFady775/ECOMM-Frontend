@@ -22,13 +22,10 @@ export default function SignIn() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await Axios.post(
-        "https://ecomm-i8yz.onrender.com/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await Axios.post("http://localhost:3001/auth/login", {
+        email,
+        password,
+      });
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       toast.success("Logged in");

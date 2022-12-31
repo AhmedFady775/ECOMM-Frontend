@@ -90,7 +90,7 @@ function ShopNav() {
   );
 
   return (
-    <nav className="flex p-5 lg:px-32 flex-col bg-black  text-white top-0 sticky z-50">
+    <nav className="flex p-5 flex-col bg-black  text-white top-0 sticky z-50">
       <section className="flex flex-row items-center justify-between ">
         <div className="flex flex-row items-center">
           <MenuIcon

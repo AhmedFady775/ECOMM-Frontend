@@ -41,7 +41,8 @@ export default function Profile() {
       const { data } = await axios.put(
         "/api/users/profile",
         {
-          name,
+          firstName,
+          lastName,
           email,
           password,
         },
@@ -64,50 +65,60 @@ export default function Profile() {
   };
 
   return (
-    <div className="container small-container">
-      <h1 className="my-3">User Profile</h1>
+    <div className="flex flex-col p-4 min-h-screen">
+      <strong className="text-lg mt-2 mb-4">User Profile</strong>
       <form onSubmit={submitHandler}>
-        <div className="mb-3" controlId="name">
-          <label>First name</label>
+        <div className="inputCont" controlId="name">
+          <label className="inputlabel">First name</label>
           <input
+            className="input"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </div>
-        <div className="mb-3" controlId="name">
-          <label>Last name</label>
+        <div className="inputCont" controlId="name">
+          <label className="inputlabel">Last name</label>
           <input
+            className="input"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
         </div>
-        <div className="mb-3" controlId="name">
-          <label>Email</label>
+        <div className="inputCont" controlId="name">
+          <label className="inputlabel">Email</label>
           <input
+            className="input"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div className="mb-3" controlId="password">
-          <label>Password</label>
+        <div className="inputCont" controlId="password">
+          <label className="inputlabel">New Password</label>
           <input
+            className="input"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="mb-3" controlId="password">
-          <label>Confirm Password</label>
+        <div className="inputCont" controlId="password">
+          <label className="inputlabel">Confirm Password</label>
           <input
+            className="input"
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <div className="mb-3">
-          <button type="submit">Update</button>
+        <div className="flex flex-col py-4">
+          <button
+            className="flex flex-row justify-center px-4 py-2 text-white bg-teal-500 rounded"
+            type="submit"
+          >
+            Update
+          </button>
           {loadingUpdate && <Loading></Loading>}
         </div>
       </form>
