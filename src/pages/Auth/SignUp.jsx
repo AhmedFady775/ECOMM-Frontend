@@ -28,12 +28,15 @@ export default function SignUp() {
       return;
     }
     try {
-      const { data } = await Axios.post("http://localhost:3001/auth/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+      const { data } = await Axios.post(
+        "https://ecomm-i8yz.onrender.com/auth/register",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+        }
+      );
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate(redirect || "/shop");

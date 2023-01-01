@@ -39,7 +39,7 @@ export default function OrdersHistory() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
-          "http://localhost:3001/orders/mine",
+          "https://ecomm-i8yz.onrender.com/orders/mine",
 
           { headers: { Authorization: `Bearer ${userInfo.token}` } }
         );
