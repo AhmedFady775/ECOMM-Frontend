@@ -32,7 +32,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:3001/orders/summary",
+          "https://ecomm-i8yz.onrender.com1/orders/summary",
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

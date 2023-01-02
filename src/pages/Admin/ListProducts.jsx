@@ -65,9 +65,12 @@ export default function ListProducts() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get("http://localhost:3001/products/", {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
+        const result = await axios.get(
+          "https://ecomm-i8yz.onrender.com1/products/",
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
