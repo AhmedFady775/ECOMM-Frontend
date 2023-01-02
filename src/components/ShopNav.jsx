@@ -90,7 +90,7 @@ function ShopNav() {
             <span onClick={toggleDrawer(false)}>Arabic</span>
           </li>
 
-          {userInfo.isAdmin ? (
+          {userInfo && userInfo.isAdmin ? (
             <li className="nav-item">
               <NavLink
                 onClick={toggleDrawer(false)}
