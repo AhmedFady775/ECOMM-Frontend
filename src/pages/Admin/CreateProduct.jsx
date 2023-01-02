@@ -3,9 +3,8 @@ import { useState, useReducer, useContext } from "react";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "react-toastify";
-import Loading from "../../../components/Loading/Loading";
-import { Store } from "../../../components/Store/Store";
-import { getError } from "../../../components/Utils/utils";
+import Loading from "../../components/Loading/Loading";
+import { Store } from "../../components/Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -48,11 +47,9 @@ function CreateProduct() {
     error: "",
   });
 
-  console.log(name)
-  console.log(type)
-  console.log(brand)
-
-
+  console.log(name);
+  console.log(type);
+  console.log(brand);
 
   const sumbitPost = async (e) => {
     e.preventDefault();
@@ -68,7 +65,7 @@ function CreateProduct() {
         countInStock,
         description,
         image,
-        images,
+        images
       );
 
       dispatch({
@@ -206,7 +203,10 @@ function CreateProduct() {
             <div className="flex flex-col">
               <strong className="flex mt-8 mb-2">Product Image</strong>
               <div className="flex flex-col">
-                <label className="flex flex-row items-center text-white py-2 px-6 bg-teal-500 rounded w-fit mb-4" htmlFor="Image">
+                <label
+                  className="flex flex-row items-center text-white py-2 px-6 bg-teal-500 rounded w-fit mb-4"
+                  htmlFor="Image"
+                >
                   <div>
                     <img src="https://img.icons8.com/material-outlined/6b7280/FFFFFF/image.png" />
                   </div>
@@ -231,7 +231,10 @@ function CreateProduct() {
             <div className="flex flex-col">
               <strong className="flex mt-8 mb-2">Product Images</strong>
               <div className="flex flex-col">
-                <label className="flex flex-row items-center text-white py-2 px-6 bg-teal-500 rounded w-fit mb-4" htmlFor="Images">
+                <label
+                  className="flex flex-row items-center text-white py-2 px-6 bg-teal-500 rounded w-fit mb-4"
+                  htmlFor="Images"
+                >
                   <div>
                     <img src="https://img.icons8.com/material-outlined/6b7280/FFFFFF/image.png" />
                   </div>

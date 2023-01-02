@@ -17,27 +17,38 @@ import Profile from "./pages/User/Profile";
 import OrdersHistory from "./pages/User/OrdersHistory";
 import Return from "./pages/User/Return";
 import ProtectedRoute from "./components/ProtoctedRoute";
-
+import SideNav from "./components/SideNav";
 import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./pages/Admin/Dashboard";
+import CreateProduct from "./pages/Admin/CreateProduct";
+import ListProducts from "./pages/Admin/ListProducts";
+import ManageProducts from "./pages/Admin/ManageProduct";
+import AdminTopBar from "./components/AdminTopBar";
+import AdminDownBar from "./components/AdminDownBar";
+import Users from "./pages/Admin/Users";
+import Products from "./pages/Admin/Products";
+import Orders from "./pages/Admin/Orders";
 
 const App = () => {
   const location = useLocation();
 
   if (
     location.pathname === "/dashboard" ||
-    location.pathname === "/createposts" ||
-    location.pathname === "/manageproduct" ||
-    location.pathname === "/listproducts"
+    location.pathname === "/products" ||
+    location.pathname === "/users" ||
+    location.pathname === "/orders"
   ) {
     return (
-      <div className="flex flex-row">
-        {/* <SideNav /> */}
+      <div className="flex flex-col sm:flex-row">
+        {/* <SideNav className="hidden sm:flex" /> */}
+        <AdminTopBar />
         <Routes>
-          {/* <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/manageproduct" element={<ManageProduct />} />
-          <Route path="/listproducts" element={<ListProducts />} />
-          <Route path="/createposts" element={<CreateProduct />} /> */}
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
+        <AdminDownBar />
       </div>
     );
   }
@@ -47,9 +58,9 @@ const App = () => {
     location.pathname !== "/signin" &&
     location.pathname !== "/signup" &&
     location.pathname !== "/dashboard" &&
-    location.pathname !== "/listproducts" &&
-    location.pathname !== "/createposts" &&
-    location.pathname !== "/manageproduct"
+    location.pathname !== "/products" &&
+    location.pathname !== "/users" &&
+    location.pathname !== "/orders"
   ) {
     return (
       <div>

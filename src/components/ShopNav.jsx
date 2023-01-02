@@ -49,8 +49,11 @@ function ShopNav() {
                 Home
               </NavLink>
             </li>
-            <CloseIcon onClick={toggleDrawer(false)} sx={{ fontSize: 30 }} />
+            <li>
+              <CloseIcon onClick={toggleDrawer(false)} sx={{ fontSize: 30 }} />
+            </li>
           </ul>
+
           <li className="nav-item">
             <NavLink
               onClick={toggleDrawer(false)}
@@ -60,6 +63,7 @@ function ShopNav() {
               Shop
             </NavLink>
           </li>
+
           {userInfo ? null : (
             <li className="nav-item">
               <NavLink
@@ -81,9 +85,22 @@ function ShopNav() {
               Shopping cart
             </NavLink>
           </li>
+
           <li className="nav-item">
             <span onClick={toggleDrawer(false)}>Arabic</span>
           </li>
+
+          {userInfo.isAdmin ? (
+            <li className="nav-item">
+              <NavLink
+                onClick={toggleDrawer(false)}
+                to="/dashboard"
+                className={(navData) => (navData.isActive ? "active" : null)}
+              >
+                Admin
+              </NavLink>
+            </li>
+          ) : null}
         </ul>
       </section>
     </div>

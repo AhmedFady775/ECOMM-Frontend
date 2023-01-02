@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { toast } from "react-toastify";
-import { Store } from "../../../components/Store/Store";
-import { getError } from "../../../components/Utils/utils";
-import Loading from "../../../components/Loading/Loading";
+import Loading from "../../components/Loading/Loading";
+import { Store } from "../../components/Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -31,7 +30,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function ManagePosts() {
+export default function ManageProducts() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
@@ -55,7 +54,9 @@ export default function ManagePosts() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get("http://localhost:5000/api/products/");
+        const result = await axios.get("http://localhost:3001/products/", {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });

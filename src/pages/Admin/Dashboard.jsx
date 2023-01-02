@@ -1,11 +1,8 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import Chart from "react-google-charts";
 import axios from "axios";
-import { Store } from "../../../components/Store/Store";
-import { getError } from "../../../components/Utils/utils";
-import Loading from "../../../components/Loading/Loading";
-import { Link } from "react-router-dom";
-import SideNav from "../../../components/SideNav/SideNav";
+import { Store } from "../../components/Store";
+import Loading from "../../components/Loading/Loading";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,13 +27,12 @@ function Dashboard() {
   });
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const { dispatch: ctxDispatch } = useContext(Store);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/orders/summary",
+          "http://localhost:3001/orders/summary",
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
@@ -45,7 +41,7 @@ function Dashboard() {
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",
-          payload: getError(err),
+          payload: err,
         });
       }
     };
@@ -53,13 +49,13 @@ function Dashboard() {
   }, [userInfo]);
 
   return (
-    <div className="flex w-full justify-center items-center">
+    <div className="flex w-full justify-center">
       {loading ? (
         <Loading />
       ) : error ? (
         <div variant="danger">{error}</div>
       ) : (
-        <div className="flex flex-col w-full p-10 gap-4">
+        <div className="flex flex-col w-full p-4 gap-4">
           <div className="flex flex-col gap-4 justify-center lg:flex-row">
             <div className="p-6 border-1 bg-white rounded-md shadow-md flex flex-col lg:w-1/3">
               <div className="flex flex-row">
@@ -146,7 +142,7 @@ function Dashboard() {
                 ></Chart>
               )}
             </div>
-            <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
+            {/* <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
               <strong>Categories</strong>
               {summary.productCategories.length === 0 ? (
                 <div>No Category</div>
@@ -162,7 +158,7 @@ function Dashboard() {
                   ]}
                 ></Chart>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       )}

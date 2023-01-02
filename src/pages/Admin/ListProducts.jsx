@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useReducer, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../../components/Loading/Loading";
-import { Store } from "../../../components/Store/Store";
-import { getError } from "../../../components/Utils/utils";
+import { Store } from "../../components/Store";
+import Loading from "../../components/Loading/Loading";
 import { toast } from "react-toastify";
 
 const reducer = (state, action) => {
@@ -54,7 +53,7 @@ export default function ListProducts() {
         toast.success("post deleted successfully");
         dispatch({ type: "DELETE_SUCCESS" });
       } catch (err) {
-        toast.error(getError(error));
+        toast.error(error);
         dispatch({
           type: "DELETE_FAIL",
         });
@@ -66,7 +65,9 @@ export default function ListProducts() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get(`http://localhost:5000/api/products/`);
+        const result = await axios.get("http://localhost:3001/products/", {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });

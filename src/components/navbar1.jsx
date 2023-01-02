@@ -88,9 +88,22 @@ function Navbar1() {
               Shopping cart
             </NavLink>
           </li>
+
           <li className="nav-item">
             <span onClick={toggleDrawer(false)}>Arabic</span>
           </li>
+
+          {userInfo.isAdmin ? (
+            <li className="nav-item">
+              <NavLink
+                onClick={toggleDrawer(false)}
+                to="/dashboard"
+                className={(navData) => (navData.isActive ? "active" : null)}
+              >
+                Admin
+              </NavLink>
+            </li>
+          ) : null}
         </ul>
       </section>
     </div>

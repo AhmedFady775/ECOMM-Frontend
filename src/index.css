@@ -39,10 +39,7 @@ body {
 }
 
 .nav-item .active {
-  color: rgb(139 92 246);
-  padding-bottom: 6px;
-  border-bottom-width: 2px;
-  border-color: rgb(139 92 246);
+  color: rgb(20 184 166);
 }
 
 .checkout-steps > div {
