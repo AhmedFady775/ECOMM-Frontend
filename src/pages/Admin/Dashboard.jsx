@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import Chart from "react-google-charts";
+// import Chart from "react-google-charts";
 import axios from "axios";
 import { Store } from "../../components/Store";
 import Loading from "../../components/Loading/Loading";
@@ -125,7 +125,7 @@ function Dashboard() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
+            {/* <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
               <strong>Sales</strong>
               {summary.dailyOrders.length === 0 ? (
                 <div>No Sale</div>
@@ -141,7 +141,7 @@ function Dashboard() {
                   ]}
                 ></Chart>
               )}
-            </div>
+            </div> */}
             {/* <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
               <strong>Categories</strong>
               {summary.productCategories.length === 0 ? (
