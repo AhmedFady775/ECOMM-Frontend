@@ -55,7 +55,7 @@ export default function ManageProducts() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get(
-          "https://ecomm-i8yz.onrender.com1/products/",
+          "https://ecomm-i8yz.onrender.com/products/",
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

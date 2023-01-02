@@ -39,7 +39,7 @@ export default function Users() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
-          "https://ecomm-i8yz.onrender.com1/users",
+          "https://ecomm-i8yz.onrender.com/users",
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

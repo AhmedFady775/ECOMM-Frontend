@@ -32,7 +32,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          "https://ecomm-i8yz.onrender.com1/orders/summary",
+          "https://ecomm-i8yz.onrender.com/orders/summary",
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
@@ -55,7 +55,7 @@ function Dashboard() {
       ) : error ? (
         <div variant="danger">{error}</div>
       ) : (
-        <div className="flex flex-col w-full p-4 gap-4">
+        <div className="flex flex-col w-full p-4 gap-4 min-h-screen">
           <div className="flex flex-col gap-4 justify-center lg:flex-row">
             <div className="p-6 border-1 bg-white rounded-md shadow-md flex flex-col lg:w-1/3">
               <div className="flex flex-row">
