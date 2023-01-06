@@ -121,7 +121,7 @@ function ShopNav() {
           </Drawer>
         </div>
         <section>
-          <div className="flex flex-row ">
+          <div className="hidden md:flex flex-row ">
             <input
               placeholder="Search.."
               className="py-2 px-5 w-[50vw] bg-white rounded-l-full"
