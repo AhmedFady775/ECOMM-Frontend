@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useReducer, useState } from "react";
 // import Chart from "react-google-charts";
 import axios from "axios";
 import { Store } from "../../components/Store";
-import Loading from "../../components/Loading/Loading";
+import LinearProgress from "@mui/joy/LinearProgress";
+import Chart from "react-google-charts";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -49,13 +50,13 @@ function Dashboard() {
   }, [userInfo]);
 
   return (
-    <div className="flex w-full justify-center">
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <div variant="danger">{error}</div>
-      ) : (
-        <div className="flex flex-col w-full p-4 gap-4 min-h-screen">
+    <div className="flex flex-col p-4 min-h-screen lg:w-[85vw]">
+      <div>
+        {loading ? (
+          <LinearProgress />
+        ) : error ? (
+          <div variant="danger">{error}</div>
+        ) : (
           <div className="flex flex-col gap-4 justify-center lg:flex-row">
             <div className="p-6 border-1 bg-white rounded-md shadow-md flex flex-col lg:w-1/3">
               <div className="flex flex-row">
@@ -123,26 +124,27 @@ function Dashboard() {
               </div>
             </div>
           </div>
+        )}
 
-          <div className="flex flex-col gap-4">
-            {/* <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
-              <strong>Sales</strong>
-              {summary.dailyOrders.length === 0 ? (
-                <div>No Sale</div>
-              ) : (
-                <Chart
-                  width="100%"
-                  chartType="AreaChart"
-                  height="400px"
-                  loader={<div>Loading Chart...</div>}
-                  data={[
-                    ["Date", "Sales"],
-                    ...summary.dailyOrders.map((x) => [x._id, x.sales]),
-                  ]}
-                ></Chart>
-              )}
-            </div> */}
-            {/* <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
+        <div className="flex flex-col gap-4">
+          {/* <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
+            <strong>Sales</strong>
+            {summary.dailyOrders.length === 0 ? (
+              <div>No Sale</div>
+            ) : (
+              <Chart
+                width="100%"
+                chartType="AreaChart"
+                height="400px"
+                loader={<div>Loading Chart...</div>}
+                data={[
+                  ["Date", "Sales"],
+                  ...summary.dailyOrders.map((x) => [x._id, x.sales]),
+                ]}
+              ></Chart>
+            )}
+          </div> */}
+          {/* <div className="flex flex-col justify-center items-center py-2 border-1 bg-white rounded-md  shadow-md">
               <strong>Categories</strong>
               {summary.productCategories.length === 0 ? (
                 <div>No Category</div>
@@ -159,9 +161,8 @@ function Dashboard() {
                 ></Chart>
               )}
             </div> */}
-          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

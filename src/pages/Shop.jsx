@@ -74,13 +74,13 @@ function Shop() {
   }, []);
 
   return (
-    <div className="md:flex md:items-center md:justify-center p-4 min-h-screen">
+    <div className="sm:flex sm:justify-center p-4 min-h-screen">
       {loading ? (
         <Loading />
       ) : error ? (
         <div> {error}</div>
       ) : (
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
           <section className="border-b-2 border-gray-100 pb-4">
             <Link to="/">Home</Link> <KeyboardArrowRight />{" "}
             <strong>Shop</strong>
@@ -97,7 +97,7 @@ function Shop() {
             </Drawer>
           </section>
           <section className="flex justify-center py-4">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {product.map((product) => (
                 <ProductsCard product={product} key={product.id} />
               ))}

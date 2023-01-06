@@ -16,7 +16,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 function AdminDownBar() {
   const location = useLocation();
   return (
-    <nav className="bottom-0 px-6 py-4 bg-white sticky shadow border-t-2">
+    <nav className="bottom-0 px-6 py-4 bg-white sticky shadow border-t-2 lg:hidden">
       <ul className="flex flex-row items-center justify-between">
         <li className="flex">
           {location.pathname === "/dashboard" ? (

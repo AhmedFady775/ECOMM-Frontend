@@ -20,7 +20,7 @@ body {
 }
 
 .input {
-  @apply rounded p-2 mb-4;
+  @apply rounded py-2 px-5 mb-4;
   border-style: solid;
   border-width: 1px;
   border-color: black;
@@ -105,4 +105,91 @@ body {
 
 .ImportantOne {
   margin: 1rem 0rem;
+}
+
+.activated {
+  @apply flex flex-row p-2 text-lg bg-slate-600 rounded;
+}
+
+.notActivated {
+  @apply flex flex-row p-2 text-lg rounded hover:bg-slate-600;
+}
+
+.roadmap {
+  display: flex;
+  padding: 10px 10px;
+}
+
+.milestone {
+  display: flex;
+  flex-direction: row;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ccc;
+  border: 2px solid #fff;
+}
+
+.line {
+  min-height: 40px;
+  background-color: #ccc;
+  width: 10px;
+}
+
+.selected__line {
+  flex-grow: 1;
+  background-color: #4caf50;
+}
+
+.selected__circle {
+  background-color: #4caf50;
+}
+
+.milestone__shapes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.button__name {
+  display: flex;
+  border: 2px solid #ccc;
+  padding: 4px 16px;
+  border-radius: 4px;
+}
+
+.selected__button {
+  display: flex;
+  background: #ccc;
+  padding: 4px 16px;
+  border-radius: 4px;
+}
+
+.button__name:hover {
+  background: #ccc;
+}
+
+.description_cont {
+  margin: 10px 0px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 2px solid #ccc;
+  min-width: 200px;
+  max-width: 600px;
+  text-align: justify;
+}
+
+.description {
+  margin-bottom: 20px;
 }

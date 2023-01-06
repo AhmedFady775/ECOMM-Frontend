@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Store } from "../../components/Store";
+import mobileLogin from "../../../src/assets/loginPic-01.png";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function SignUp() {
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate(redirect || "/shop");
     } catch (error) {
-      toast.error(error);
+      toast.error("Password isn't correct");
     }
   };
 
@@ -52,79 +53,81 @@ export default function SignUp() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <div className="flex items-center h-screen flex-col justify-between py-24 bg-white">
-      <strong className="text-6xl text-teal-500">Sign Up</strong>
-      <form onSubmit={submitHandler} className="w-[80%]">
-        <div className="flex flex-col mb-12">
-          <div className="flex flex-col p-2 border-b-2  border-slate-600 mb-8">
-            <input
-              placeholder="First name"
-              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
-          </div>
+    <div className="flex h-screen items-center justify-center bg-white">
+      <div className="flex flex-row items-center space-x-32 w-full justify-center">
+        <form onSubmit={submitHandler} className="w-[70%] md:w-[30%]">
+          <p className="text-5xl font-bold text-gray-400 mb-10">SIGN UP</p>
+          <div className="flex flex-col mb-12">
+            <div className="inputCont">
+              <label className="inputlabel">First Name</label>
+              <input
+                placeholder="First Name"
+                className="input"
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="inputCont">
+              <label className="inputlabel">Last Name</label>
+              <input
+                placeholder="Last Name"
+                className="input"
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="inputCont">
+              <label className="inputlabel">E-mail</label>
+              <input
+                placeholder="E-mail"
+                className="input"
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-          <div className="flex flex-col p-2 border-b-2  border-slate-600 mb-8">
-            <input
-              placeholder="Last name"
-              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
+            <div className="inputCont">
+              <label className="inputlabel">Password</label>
+              <input
+                className="input"
+                placeholder="Password"
+                type={passwordShown ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="inputCont">
+              <label className="inputlabel">Confirm Password</label>
+              <input
+                className="input"
+                type="password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
           </div>
-
-          <div className="flex flex-col p-2 border-b-2  border-slate-600 mb-8">
-            <input
-              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              placeholder="E-mail"
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+          <div className="flex flex-col">
+            <button
+              className="bg-teal-500 text-white py-2 px-6 rounded"
+              type="submit"
+            >
+              Sign Up
+            </button>
           </div>
-
-          <div className="flex flex-row justify-between p-2 border-b-2  border-slate-600 mb-8">
-            <input
-              placeholder="Password"
-              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              type={passwordShown ? "text" : "password"}
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span onClick={() => setPasswordShown(!passwordShown)}>
-              {passwordShown ? (
-                <VisibilityOffIcon></VisibilityOffIcon>
-              ) : (
-                <VisibilityIcon></VisibilityIcon>
-              )}
-            </span>
+          <div className="flex mt-10">
+            Already have an account?
+            <Link
+              className="text-sky-500 ml-2"
+              to={`/signin?redirect=${redirect}`}
+            >
+              Sign In.
+            </Link>
           </div>
-          <div className="flex flex-col p-2 border-b-2  border-slate-600">
-            <input
-              placeholder="Confirm Password"
-              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              type={passwordShown ? "text" : "password"}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
+        </form>
+        <div className="md:flex hidden flex-col items-center">
+          <img src={mobileLogin} className="w-[500px]" />
         </div>
-
-        <div className="flex flex-col">
-          <button
-            className="bg-teal-500 text-white py-2 px-6 rounded"
-            type="submit"
-          >
-            Sign Up
-          </button>
-        </div>
-      </form>
-      <div className="flex">
-        Already have an account?
-        <Link className="text-sky-500 ml-2" to={`/signin?redirect=${redirect}`}>
-          Sign In.
-        </Link>
       </div>
     </div>
   );

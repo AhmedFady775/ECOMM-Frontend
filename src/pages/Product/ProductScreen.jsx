@@ -90,9 +90,9 @@ function ProductScreen() {
             <p className="text-justify">{product.descreption}</p>
             <p className="flex py-2 text-xl font-medium">Quantity</p>
             <div className="flex flex-row text-center p-4 bg-slate-100 w-fit rounded">
-              <AddIcon className="rounded mr-4  bg-teal-500 text-white" />
+              <RemoveIcon className="rounded mr-4 p-1 bg-teal-500 text-white" />
               {product.countInStock}
-              <RemoveIcon className="rounded ml-4 bg-teal-500 text-white" />
+              <AddIcon className="rounded ml-4 p-1 bg-teal-500 text-white" />
             </div>
             <div className="hidden lg:flex flex-row bottom-0 py-4 bg-white space-x-4">
               <button className=" bg-teal-500 text-white text-lg rounded py-2 w-full">

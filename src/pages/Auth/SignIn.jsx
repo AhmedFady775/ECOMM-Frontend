@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Store } from "../../components/Store";
+import mobileLogin from "../../../src/assets/loginPic-01.png";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -33,8 +34,8 @@ export default function SignIn() {
       localStorage.setItem("userInfo", JSON.stringify(data));
       toast.success("Logged in");
       navigate(redirect || "/shop");
-    } catch (err) {
-      toast.error(err);
+    } catch (error) {
+      toast.error("Wrong Password");
     }
   };
 
@@ -45,64 +46,55 @@ export default function SignIn() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <div className="flex items-center h-screen flex-col justify-between py-36 bg-white">
-      <div className="flex flex-col items-center">
-        {/* <Link to="/" className="bg-slate-900">
-          <img src={V2S} width={"180px"} />
-        </Link> */}
-        <strong className="text-6xl text-teal-500">Sign In</strong>
-      </div>
+    <div className="flex h-screen items-center justify-center bg-white">
+      <div className="flex flex-row items-center md:space-x-32 w-full justify-center">
+        <div className="md:flex hidden flex-col items-center">
+          <img src={mobileLogin} className="w-[500px]" />
+        </div>
 
-      <form onSubmit={submitHandler} className="w-[80%] lg:w-[25%]">
-        <div className="flex flex-col mb-12">
-          <div className="flex flex-col p-2 border-b-2  border-slate-600 mb-8">
-            <input
-              placeholder="E-mail"
-              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex flex-row p-2 border-b-2 border-slate-600 justify-between">
-            <input
-              className="bg-transparent focus:outline-none focus:placeholder:text-transparent"
-              placeholder="Password"
-              type={passwordShown ? "text" : "password"}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <div>
-              <div className="showPass">
-                <span
-                  className="showPassButton"
-                  onClick={() => setPasswordShown(!passwordShown)}
-                >
-                  {passwordShown ? (
-                    <VisibilityOffIcon></VisibilityOffIcon>
-                  ) : (
-                    <VisibilityIcon></VisibilityIcon>
-                  )}
-                </span>
-              </div>
+        <form onSubmit={submitHandler} className="w-[70%] md:w-[30%]">
+          <p className="text-5xl font-bold text-gray-400 mb-10">SIGN IN</p>
+          <div className="flex flex-col mb-12">
+            <label className="inputlabel">E-mail</label>
+            <div className="inputCont">
+              <input
+                placeholder="E-mail"
+                className="input"
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="inputCont justify-between">
+              <label className="inputlabel">Password</label>
+              <input
+                className="input"
+                placeholder="Password"
+                type={passwordShown ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
           </div>
-        </div>
-        <div className="flex flex-col">
-          <button
-            className="bg-teal-500 text-white py-2 px-6 rounded"
-            type="submit"
-          >
-            Sign In
-          </button>
-        </div>
-      </form>
-
-      <div className="flex">
-        New customer?{" "}
-        <Link className="text-sky-500 ml-2" to={`/signup?redirect=${redirect}`}>
-          Create your account.
-        </Link>
+          <div className="flex flex-col">
+            <button
+              className="bg-teal-500 text-white py-2 px-6 rounded"
+              type="submit"
+            >
+              Sign In
+            </button>
+          </div>
+          <div className="flex mt-10">
+            New customer?{" "}
+            <Link
+              className="text-sky-500 ml-2"
+              to={`/signup?redirect=${redirect}`}
+            >
+              Create your account.
+            </Link>
+          </div>
+        </form>
       </div>
     </div>
   );

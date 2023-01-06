@@ -115,13 +115,13 @@ function AdminTopBar() {
   );
 
   return (
-    <nav className="flex p-6 bg-slate-800 shadow text-white">
+    <nav className="flex p-6 lg:hidden bg-slate-800 shadow text-white">
       <ul className="flex flex-row items-center justify-between w-full">
         <li>
           <MenuIcon onClick={toggleDrawer(true)} fontSize="large" />
           <Drawer open={open} anchor="left" onClose={toggleDrawer(false)}>
             {list()}
-          </Drawer>{" "}
+          </Drawer>
         </li>
         <li>
           {location.pathname === "/dashboard" ? (

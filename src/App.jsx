@@ -20,14 +20,12 @@ import ProtectedRoute from "./components/ProtoctedRoute";
 import SideNav from "./components/SideNav";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./pages/Admin/Dashboard";
-import CreateProduct from "./pages/Admin/CreateProduct";
-import ListProducts from "./pages/Admin/ListProducts";
-import ManageProducts from "./pages/Admin/ManageProduct";
 import AdminTopBar from "./components/AdminTopBar";
 import AdminDownBar from "./components/AdminDownBar";
-import Users from "./pages/Admin/Users";
-import Products from "./pages/Admin/Products";
-import Orders from "./pages/Admin/Orders";
+import Users from "./pages/Admin/Users/Users";
+import Products from "./pages/Admin/Products/Products";
+import Orders from "./pages/Admin/Orders/Orders";
+import CreateProduct from "./pages/Admin/Products/CreateProduct";
 
 const App = () => {
   const location = useLocation();
@@ -36,30 +34,33 @@ const App = () => {
     location.pathname === "/dashboard" ||
     location.pathname === "/products" ||
     location.pathname === "/users" ||
+    location.pathname === "/createproduct" ||
     location.pathname === "/orders"
   ) {
     return (
-      <div className="flex flex-col sm:flex-row">
-        {/* <SideNav className="hidden sm:flex" /> */}
+      <div className="flex flex-col lg:flex-row">
+        <SideNav />
         <AdminTopBar />
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/createproduct" element={<CreateProduct />} />
           <Route path="/users" element={<Users />} />
           <Route path="/orders" element={<Orders />} />
         </Routes>
         <AdminDownBar />
+        <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
       </div>
     );
   }
 
   if (
-    location.pathname !== "/" &&
     location.pathname !== "/signin" &&
     location.pathname !== "/signup" &&
     location.pathname !== "/dashboard" &&
     location.pathname !== "/products" &&
     location.pathname !== "/users" &&
+    location.pathname !== "/createproduct" &&
     location.pathname !== "/orders"
   ) {
     return (
@@ -105,6 +106,7 @@ const App = () => {
           <Route path="/payment" element={<PaymentMethodScreen />}></Route>
           <Route path="/placeorder" element={<PlaceOrderScreen />} />
           <Route path="/order/:id" element={<OrderScreen />}></Route>
+          <Route path="/" element={<Shop />} />
         </Routes>
         <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
         <Footer />
@@ -115,7 +117,6 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>

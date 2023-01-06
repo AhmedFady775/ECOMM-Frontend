@@ -11,40 +11,47 @@ import { Tab } from "@mui/material";
 import { useState } from "react";
 import Loading from "../components/Loading/Loading";
 import ProductsCard from "./Product/ProductCard";
-import Navbar1 from "../components/navbar1";
+import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import Roadmap from "../components/MileStone";
+
+const milestones = [
+  {
+    name: "walking",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
+  },
+  {
+    name: "riding",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
+  },
+
+  {
+    name: "flying",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
+  },
+  {
+    name: "hiking",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
+  },
+  {
+    name: "playing",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
+  },
+];
 
 export default function Home() {
   return (
     <>
-      <Navbar1 />
+      <Navbar />
       <div className="md:flex md:items-center md:justify-center">
         <div className="flex flex-col ">
-          <section className="flex flex-col">
-            <div className="hidden lg:flex">
-              <Carousel
-                showThumbs={false}
-                showIndicators={false}
-                showStatus={false}
-                autoPlay={true}
-                infiniteLoop={true}
-                swipeable={true}
-              >
-                <div>
-                  <img src={pic1} />
-                </div>
-                <div>
-                  <img src={pic2} />
-                </div>
-                <div>
-                  <img src={pic3} />
-                </div>
-              </Carousel>
-            </div>
-          </section>
-
           <div className="flex justify-center font-bold text-3xl py-10 lg:20">
-            FEATURED PRODUCTS
+            Landing page
           </div>
         </div>
       </div>

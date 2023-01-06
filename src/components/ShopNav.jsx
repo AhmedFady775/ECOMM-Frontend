@@ -9,6 +9,7 @@ import { useState, useContext } from "react";
 import { Drawer } from "@mui/material";
 import { Store } from "../components/Store";
 import CloseIcon from "@mui/icons-material/Close";
+import { toast } from "react-toastify";
 
 function ShopNav() {
   const [isHovering, setIsHovering] = useState(false);
@@ -108,7 +109,7 @@ function ShopNav() {
 
   return (
     <nav className="flex p-5 flex-col bg-black  text-white top-0 sticky z-50">
-      <section className="flex flex-row items-center justify-between ">
+      <section className="flex flex-row items-center justify-between lg:justify-center ">
         <div className="flex flex-row items-center">
           <MenuIcon
             onClick={toggleDrawer(true)}
@@ -119,8 +120,18 @@ function ShopNav() {
             {list()}
           </Drawer>
         </div>
+        <section>
+          <div className="flex flex-row ">
+            <input
+              placeholder="Search.."
+              className="py-2 px-5 w-[50vw] bg-white rounded-l-full"
+            />
+            <div className="p-2  bg-white rounded-r-full">
+              <SearchIcon className="text-black" />
+            </div>
+          </div>
+        </section>
         <div className="flex flex-row items-center">
-          <SearchIcon />
           <div className="flex flex-row items-center">
             {userInfo ? (
               <div className="flex">
@@ -160,9 +171,9 @@ function ShopNav() {
                 <PersonIcon />
               </Link>
             )}
-            <Link to="/cart">
+            <Link className="flex flex-row" to="/cart">
               <ShoppingCartIcon />
-              <div className="absolute top-[20%] right-[3%] bg-red-500 rounded-full flex justify-center items-center text-xs h-5 w-5">
+              <div className="relative top-[-10px] right-[10px] bg-red-500 rounded-full flex justify-center items-center text-xs h-5 w-5">
                 {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
               </div>
             </Link>

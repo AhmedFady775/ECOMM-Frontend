@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import PIC1 from "../assets/2.png";
 import V2S from "../assets/V2S.png";
 import { Store } from "./Store";
+import v2s from "../assets/V2S.png";
+import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function SideNav() {
   const { state } = useContext(Store);
@@ -31,137 +38,92 @@ function SideNav() {
     localStorage.removeItem("paymentMethod");
   };
   return (
-    <nav className="flex sm:h-screen flex-col bg-slate-800 items-center justify-around sm:w-96 cursor-default top-0 sticky">
-      <Link className="" to="/">
-        <div>
-          <img src={V2S} className="w-[80px] sm:w-[120px] pt-4" />
-        </div>
+    <nav className="hidden lg:flex sm:h-screen flex-col text-white bg-slate-800 justify-around w-[15vw] cursor-default top-0 sticky">
+      <Link to="/">
+        <li className="flex justify-center">
+          <img className="w-20" src={v2s} />
+        </li>
       </Link>
-
-      <ul className="flex sm:flex-col flex-row list-none text-white py-4 justify-around w-full">
-        <li className="sm:flex text-xl opacity-90 hidden">Menu</li>
-        <Link to="/dashboard">
-          <li className="flex text-lg flex-col hover:bg-gray-300/[0.1] hover:rounded-lg">
-            <div>
-              <div className="flex items-center">
-                <span>
-                  <img src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png"></img>
-                </span>
-                <span className="hidden sm:flex">Dashboard</span>
-              </div>
-            </div>
-          </li>
+      <ul className="hidden sm:flex flex-col space-y-4 mx-8">
+        <Link
+          to="/dashboard"
+          className={
+            location.pathname === "/dashboard" ? "activated" : "notActivated"
+          }
+        >
+          <div className="flex flex-row items-center">
+            <GridViewOutlinedIcon className="mr-4" sx={{ fontSize: 30 }} />
+            <p> Dashboard</p>
+          </div>
         </Link>
-        <li className="flex text-lg flex-col hover:bg-gray-300/[0.1] hover:rounded-lg">
-          <div onClick={handleDropdown}>
-            <div className="flex items-center">
-              <span>
-                <img src="https://img.icons8.com/material/25/FFFFFF/shipping-product.png"></img>
-              </span>
-              <span className="hidden sm:flex">Products</span>
-            </div>
-            {/* <span
-              className={
-                dropdown
-                  ? "fas fa-minus pr-2 text-xs"
-                  : "fas fa-plus pr-2 text-xs"
-              }
-            /> */}
-          </div>
-          {dropdown && (
-            <ul className="flex flex-col ml-10">
-              <Link to="/createposts">
-                <li className="text-[18px] py-2 font-light hover:border-b-2 w-fit">
-                  Create product
-                </li>
-              </Link>
-              <Link to="/manageproduct">
-                <li className="text-[18px] pb-2 font-light hover:border-b-2 w-fit">
-                  Manage Product
-                </li>
-              </Link>
-              <Link to="/listproducts">
-                <li className="text-[18px] pb-2 font-light hover:border-b-2 w-fit">
-                  Products list{" "}
-                </li>
-              </Link>
-            </ul>
-          )}
-        </li>
-        <li className="flex text-lg flex-col hover:bg-gray-300/[0.1] hover:rounded-lg">
-          <div onClick={handleOrdersDropdown}>
-            <div className="flex items-center">
-              <span>
-                <img src="https://img.icons8.com/material/25/FFFFFF/purchase-order.png"></img>
-              </span>
-              <span className="hidden sm:flex">Orders</span>
-            </div>
-            {/* <span
-              className={
-                Ordersdropdown
-                  ? "fas fa-minus pr-2 text-xs"
-                  : "fas fa-plus pr-2 text-xs"
-              }
-            /> */}
-          </div>
 
-          {Ordersdropdown && (
-            <ul className="flex flex-col ml-10">
-              <li className="text-[18px] py-2 font-light">Orders List</li>
-              <li className="text-[18px] pb-2 font-light">Manage orders</li>
-            </ul>
-          )}
-        </li>
-        <li className="flex text-lg flex-col hover:bg-gray-300/[0.1] hover:rounded-lg">
-          <div onClick={handleUsersDropdown}>
-            <div className="flex items-center">
-              <span>
-                <img src="https://img.icons8.com/material/25/FFFFFF/guest-male--v1.png"></img>
-              </span>
-              <span className="hidden sm:flex">Users</span>
-            </div>
-            {/* <span
-              className={
-                Usersdropdown
-                  ? "fas fa-minus pr-2 text-xs"
-                  : "fas fa-plus pr-2 text-xs"
-              }
-            /> */}
+        <Link
+          to="/products"
+          className={
+            location.pathname === "/products" ? "activated" : "notActivated"
+          }
+        >
+          <div className="flex flex-row items-center">
+            <Inventory2OutlinedIcon className="mr-4" sx={{ fontSize: 30 }} />
+            <p> Products</p>
           </div>
-          {Usersdropdown && (
-            <ul className="flex flex-col ml-12">
-              <li className="text-[18px] py-2 font-light">Users list</li>
-              <li className="text-[18px] pb-2 font-light">Manage users</li>
-            </ul>
-          )}
-        </li>
-      </ul>
-      <ul className="lg:flex flex-col list-none text-white w-full px-2 hidden">
-        <li className="flex flex-col hover:bg-gray-300/[0.1] hover:rounded-lg">
-          <div className="lg:flex flex-row justify-between text-white items-center hidden">
-            <div className="flex h-12 w-12  rounded-full">
-              <img className="rounded-full object-cover" src={PIC1} />
-            </div>
-            <div className="flex flex-col mr-8">
-              <p> Ahmed Fady </p>
-              <p className="font-light"> Page Admin </p>
-            </div>
-            <i className={"fa fa-arrow-down text-sm"} />
+        </Link>
+
+        <Link
+          to="/orders"
+          className={
+            location.pathname === "/orders" ? "activated" : "notActivated"
+          }
+        >
+          <div className="flex flex-row items-center">
+            <LocalShippingOutlinedIcon className="mr-4" sx={{ fontSize: 30 }} />
+            <p> Orders</p>
           </div>
-        </li>
-        <li className="flex text-lg flex-col hover:bg-gray-300/[0.1] hover:rounded-lg">
-          <Link
-            className="flex flex-row items-center justify-between "
-            to="/signin"
+        </Link>
+        <Link
+          to="/users"
+          className={
+            location.pathname === "/users" ? "activated" : "notActivated"
+          }
+        >
+          <div className="flex flex-row items-center">
+            <PeopleAltOutlinedIcon className="mr-4" sx={{ fontSize: 30 }} />
+            <p> Users</p>
+          </div>
+        </Link>
+        <Link
+          to="/settings"
+          className={
+            location.pathname === "/settings" ? "activated" : "notActivated"
+          }
+        >
+          <div className="flex flex-row items-center">
+            <SettingsOutlinedIcon className="mr-4" sx={{ fontSize: 30 }} />
+            <p> Setting</p>
+          </div>
+        </Link>
+        <Link to="/singin" className="notActivated">
+          <div
             onClick={() => {
               signoutHandler();
             }}
+            className="flex flex-row items-center"
           >
-            <img src="https://img.icons8.com/external-inkubators-detailed-outline-inkubators/25/FFFFFF/external-log-out-ecommerce-user-interface-inkubators-detailed-outline-inkubators.png"></img>
-            <p className="text-[20px]">Log out</p>
-          </Link>
-        </li>
+            <LogoutIcon className="mr-4" sx={{ fontSize: 30 }} />
+            <p> Log out</p>
+          </div>
+        </Link>
       </ul>
+      <section className="flex flex-row p-2 text-lg rounded justify-between items-center mx-8">
+        <div className="flex h-12 w-12  rounded-full">
+          <img className="rounded-full object-cover" src={PIC1} />
+        </div>
+        <div className="flex flex-col">
+          <p> Ahmed Fady </p>
+          <p className="font-light"> Page Admin </p>
+        </div>
+        <i className={"fa fa-arrow-down text-sm"} />
+      </section>
     </nav>
   );
 }

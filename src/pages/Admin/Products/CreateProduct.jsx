@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useReducer, useContext } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "react-toastify";
-import Loading from "../../components/Loading/Loading";
-import { Store } from "../../components/Store";
+import Loading from "../../../components/Loading/Loading";
+import { Store } from "../../../components/Store";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -47,9 +49,7 @@ function CreateProduct() {
     error: "",
   });
 
-  console.log(name);
-  console.log(type);
-  console.log(brand);
+  const [choose, setChoose] = useState(false);
 
   const sumbitPost = async (e) => {
     e.preventDefault();
@@ -113,18 +113,31 @@ function CreateProduct() {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full p-10">
-      <p className="flex text-4xl font-bold">New Product</p>
-
-      <form
-        onSubmit={sumbitPost}
-        encType="multipart/form-data"
-        className="my-4"
-      >
+    <div className="flex flex-col p-4 min-h-screen lg:w-[85vw]">
+      <div className="flex flex-col cursor-pointer mb-4">
+        <div
+          onClick={() => setChoose(!choose)}
+          className="flex flex-row items-end  mb-2"
+        >
+          <p className="text-3xl"> Products</p>
+          <KeyboardArrowDownIcon sx={{ fontSize: 30 }} />
+        </div>
+        {choose ? (
+          <div className="flex flex-col mb-4 w-fit text-lg ml-4 py-2 border shadow-lg rounded">
+            <Link className="px-4 py-2 hover:bg-slate-200" to="/products">
+              Manage Products
+            </Link>
+            <Link className="px-4 py-2 hover:bg-slate-200" to="/createproduct">
+              Create Product
+            </Link>
+          </div>
+        ) : null}
+      </div>
+      <form onSubmit={sumbitPost} encType="multipart/form-data">
         <div className="flex flex-row gap-10">
           <div className="flex flex-col">
             <div className="flex flex-col">
-              <label className="flex mt-8 mb-2">
+              <label className="flex mt-4 mb-2">
                 <strong>Product Name</strong>
               </label>
               <input

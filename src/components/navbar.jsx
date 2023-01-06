@@ -3,19 +3,23 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
-import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { Drawer } from "@mui/material";
-import { Store } from "../components/Store";
+import { Store } from "./Store";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import V2S from "../assets/V2S.png";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 
 function Navbar() {
   const [isHovering, setIsHovering] = useState(false);
+
   const { state } = useContext(Store);
   const { cart, userInfo } = state;
   const { dispatch: ctxDispatch } = useContext(Store);
 
-  // hover
   const handleOnClick = () => {
     setIsHovering(!isHovering);
   };
@@ -34,63 +38,104 @@ function Navbar() {
     setOpen(newOpen);
   };
 
-  const list = () => <div className="w-[80vw] h-full bg-[f7f7f7]">hello</div>;
+  const list = () => (
+    <div className="w-[80vw] h-full bg-[f7f7f7]">
+      <section className="flex-col flex px-6 py-10 text-black space-y-6 text-xl font-medium">
+        <ul className="flex flex-col text-black space-y-8">
+          <ul className="flex felx-row justify-between">
+            <li className="nav-item">
+              <NavLink
+                onClick={toggleDrawer(false)}
+                to="/"
+                className={(navData) => (navData.isActive ? "active" : null)}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <CloseIcon onClick={toggleDrawer(false)} sx={{ fontSize: 30 }} />
+            </li>
+          </ul>
 
-  const Links = [
-    "Cameras",
-    "Wires",
-    "Books",
-    "Deals",
-    "Tv",
-    "Phone",
-    "Mobile",
-    "Kitchen",
-  ];
+          <li className="nav-item">
+            <NavLink
+              onClick={toggleDrawer(false)}
+              to="shop"
+              className={(navData) => (navData.isActive ? "active" : null)}
+            >
+              Shop
+            </NavLink>
+          </li>
+
+          {userInfo ? null : (
+            <li className="nav-item">
+              <NavLink
+                onClick={toggleDrawer(false)}
+                to="/signin"
+                className={(navData) => (navData.isActive ? "active" : null)}
+              >
+                Sign in
+              </NavLink>
+            </li>
+          )}
+
+          <li className="nav-item">
+            <NavLink
+              onClick={toggleDrawer(false)}
+              to="/cart"
+              className={(navData) => (navData.isActive ? "active" : null)}
+            >
+              Shopping cart
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <span onClick={toggleDrawer(false)}>Arabic</span>
+          </li>
+
+          {userInfo && userInfo.isAdmin ? (
+            <li className="nav-item">
+              <NavLink
+                onClick={toggleDrawer(false)}
+                to="/dashboard"
+                className={(navData) => (navData.isActive ? "active" : null)}
+              >
+                Admin
+              </NavLink>
+            </li>
+          ) : null}
+        </ul>
+      </section>
+    </div>
+  );
+
   return (
-    <div className="flex flex-col">
-      <nav className="flex p-2 flex-col bg-black  text-white">
-        <section className="flex flex-row items-center justify-between">
+    <nav className="flex p-5 lg:px-32 flex-col bg-black  text-white top-0 sticky z-50">
+      <section className="flex flex-row items-center justify-between ">
+        <div className="flex flex-row items-center">
+          <Link className="hidden lg:flex" to="/">
+            <img src={V2S} width={"80px"} />
+          </Link>
+          <span className="flex lg:hidden">
+            <MenuIcon onClick={toggleDrawer(true)} fontSize="large" />
+            <Drawer open={open} anchor="left" onClose={toggleDrawer(false)}>
+              {list()}
+            </Drawer>
+          </span>
+        </div>
+        <div className="hidden lg:flex flex-row items-center">
+          <SearchIcon />
           <div className="flex flex-row items-center">
-            <span className="flex lg:hidden mr-4">
-              <MenuIcon onClick={toggleDrawer(true)} fontSize="large" />
-              <Drawer open={open} anchor="left" onClose={toggleDrawer(false)}>
-                {list()}
-              </Drawer>
-            </span>
-            <Link to="/">
-              <span className="flex">
-                <img src="https://img.icons8.com/material-rounded/30/FFFFFF/home-page.png" />
-              </span>
-            </Link>
-            <p className="flex ml-4">Deliever to </p>
-          </div>
-          <section className="w-[70%] hidden lg:flex">
-            <input
-              className="text-black outline-none flex rounded-l-md px-2 py-2 w-full"
-              required
-              placeholder="search V2S.."
-            />
-            <span className="bg-emerald-500 px-2 rounded-r-md py-2">
-              <SearchIcon className="text-white" />
-            </span>
-          </section>
-          <div className="flex flex-row items-center">
-            <div className="flex mx-4">EN</div>
             {userInfo ? (
-              <div className="hidden lg:flex">
+              <div className="flex">
                 <div
                   onClick={handleOnClick}
                   className="cursor-pointer flex flex-col mx-4"
                 >
-                  Hello, {userInfo.firstName}!
                   <div className="flex flex-row">
-                    My Account
-                    <img
-                      className="ml-1"
-                      src="https://img.icons8.com/material/18/FFFFFF/sort-down--v2.png"
-                    />
+                    <PersonIcon />
                     {isHovering && (
-                      <div className="flex flex-col bg-white text-black absolute top-[60px] rounded py-2 w-[150px] shadow z-10">
+                      <div className="flex flex-col bg-white text-black absolute top-[60px] right-[140px] rounded py-2 w-[150px] shadow z-10">
                         <div className="dropDown"> Profile </div>
                         <div className="dropDown"> Orders </div>
                         <div className="dropDown"> Payments </div>
@@ -105,68 +150,23 @@ function Navbar() {
                     )}
                   </div>
                 </div>
-                <div className="flex flex-row mx-4">
-                  Wishlist
-                  <img
-                    className="ml-2"
-                    src="https://img.icons8.com/material/20/FFFFFF/like--v1.png"
-                  />
-                </div>
+                <FavoriteIcon />
               </div>
             ) : (
-              <Link to="/signin">
-                <div className="flex flex-row items-center mx-4">
-                  Sign in
-                  <img
-                    className="ml-2"
-                    src="https://img.icons8.com/material/20/FFFFFF/person-male.png"
-                  />
-                </div>
+              <Link to="/signin" className="pl-4">
+                <PersonIcon />
               </Link>
             )}
-            <div className="flex flex-row items-center">
-              Cart
-              <img
-                className="ml-2"
-                src="https://img.icons8.com/material/20/FFFFFF/shopping-cart--v1.png"
-              />
-            </div>
-          </div>
-        </section>
-        <section className="flex my-2 lg:hidden">
-          <input
-            className="text-black outline-none flex rounded-l-md px-2 py-2 w-full"
-            required
-            placeholder="search V2S.."
-          />
-          <span className="bg-emerald-500 px-2 rounded-r-md py-2">
-            <SearchIcon className="text-white" />
-          </span>
-        </section>
-        <section className="flex overflow-x-scroll w-full space-x-4 scrollbar-hide py-2 lg:hidden">
-          {Links.map((item) => (
-            <Link to={`/${item}`}>{item}</Link>
-          ))}
-        </section>
-      </nav>
-      <section className="lg:flex flex-col text-white hidden bg-slate-800 items-center">
-        <p className="lg:hidden">Deliever to </p>
-        <section className="flex flex-row items-center w-full">
-          <span className="flex py-2 px-4 hover:bg-slate-700 items-center cursor-pointer">
-            <img
-              src="https://img.icons8.com/material/20/FFFFFF/menu--v1.png"
-              className="mr-2"
-            />
-            ALL CATEGORIES
-          </span>
-          {Links.map((item) => (
-            <Link to={`/${item}`} className="py-2 px-4 hover:bg-slate-700">
-              {item}
+            <Link to="/cart" className="pl-4">
+              <ShoppingCartIcon />
             </Link>
-          ))}
-        </section>
+          </div>
+        </div>
+        <Link className="flex lg:hidden" to="/">
+          <img src={V2S} width={"60px"} />
+        </Link>
       </section>
-    </div>
+    </nav>
   );
 }
 
