@@ -71,15 +71,15 @@ export default function OrdersHistory() {
   }));
 
   return (
-    <div className="flex flex-col p-4 min-h-screen">
+    <div className="flex flex-col lg:items-center p-4 min-h-screen">
       <strong className="text-lg mt-2 mb-4">Orders history</strong>
       {loading ? (
         <Loading />
       ) : error ? (
         { error }
       ) : (
-        <>
-          <TableContainer className="hidden md:flex" component={Paper}>
+        <div className="lg:w-[70%]">
+          <TableContainer className="hidden md:flex " component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
@@ -150,7 +150,7 @@ export default function OrdersHistory() {
               </div>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

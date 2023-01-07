@@ -9,13 +9,24 @@ import { useState, useContext } from "react";
 import { Drawer } from "@mui/material";
 import { Store } from "../components/Store";
 import CloseIcon from "@mui/icons-material/Close";
-import { toast } from "react-toastify";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
+import Badge from "@mui/material/Badge";
 
 function ShopNav() {
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleOnClick = () => {
-    setIsHovering(!isHovering);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openDrop = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const { state } = useContext(Store);
@@ -37,7 +48,7 @@ function ShopNav() {
   };
 
   const list = () => (
-    <div className="w-[80vw] h-full bg-[f7f7f7]">
+    <div className="w-[80vw] lg:w-[30vw] bg-[f7f7f7]">
       <section className="flex-col flex px-6 py-10 text-black space-y-6 text-xl font-medium">
         <ul className="flex flex-col text-black space-y-8">
           <ul className="flex felx-row justify-between">
@@ -135,36 +146,71 @@ function ShopNav() {
           <div className="flex flex-row items-center">
             {userInfo ? (
               <div className="flex">
-                <div
-                  onClick={handleOnClick}
-                  className="cursor-pointer flex flex-col mx-4"
-                >
+                <div className="cursor-pointer flex flex-col mx-4">
                   <div className="flex flex-row">
-                    <PersonIcon />
-                    {isHovering && (
-                      <div className="flex flex-col bg-white text-black absolute top-[55px] rounded py-2 w-[150px] shadow z-10">
-                        <Link to="/user/profile" className="dropDown">
-                          Profile
-                        </Link>
-                        <Link to="/user/ordershistory" className="dropDown">
-                          Orders{" "}
-                        </Link>
-                        <Link to="/user/payments" className="dropDown">
-                          Payments{" "}
-                        </Link>
-                        <Link to="/user/returns" className="dropDown">
-                          Returns{" "}
-                        </Link>
-                        <Link
-                          to="/signin"
-                          onClick={signoutHandler}
-                          className="flex justify-center pt-2 hover:text-slate-400 border-slate-300 border-t-[1px] text-sm text-slate-500"
-                        >
-                          {" "}
-                          Sign out
-                        </Link>
-                      </div>
-                    )}
+                    <PersonIcon onClick={handleClick} />
+                    <Menu
+                      anchorEl={anchorEl}
+                      id="account-menu"
+                      open={openDrop}
+                      onClose={handleClose}
+                      onClick={handleClose}
+                      PaperProps={{
+                        elevation: 0,
+                        sx: {
+                          width: 200,
+                          overflow: "visible",
+                          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                          mt: 2.5,
+                          "&:before": {
+                            content: '""',
+                            display: "block",
+                            position: "absolute",
+                            top: 0,
+                            right: 8,
+                            width: 10,
+                            height: 10,
+                            bgcolor: "background.paper",
+                            transform: "translateY(-50%) rotate(45deg)",
+                            zIndex: 0,
+                          },
+                        },
+                      }}
+                      transformOrigin={{
+                        horizontal: "right",
+                        vertical: "top",
+                      }}
+                      anchorOrigin={{
+                        horizontal: "right",
+                        vertical: "bottom",
+                      }}
+                    >
+                      <Link to="/user/profile">
+                        <MenuItem>Profile</MenuItem>
+                      </Link>
+
+                      <Link to="/user/ordershistory">
+                        <MenuItem>Orders</MenuItem>
+                      </Link>
+
+                      <Link to="/user/payments">
+                        <MenuItem>Payments</MenuItem>
+                      </Link>
+
+                      <Link to="/user/returns">
+                        <MenuItem>Returns</MenuItem>
+                      </Link>
+
+                      <Divider />
+                      <Link to="/signin" onClick={signoutHandler}>
+                        <MenuItem>
+                          <ListItemIcon>
+                            <Logout fontSize="small" />
+                          </ListItemIcon>
+                          Logout
+                        </MenuItem>
+                      </Link>
+                    </Menu>
                   </div>
                 </div>
               </div>
@@ -174,10 +220,16 @@ function ShopNav() {
               </Link>
             )}
             <Link className="flex flex-row" to="/cart">
-              <ShoppingCartIcon />
-              <div className="relative top-[-10px] right-[10px] bg-red-500 rounded-full flex justify-center items-center text-xs h-5 w-5">
-                {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-              </div>
+              <Badge
+                badgeContent={cart.cartItems.reduce(
+                  (a, c) => a + c.quantity,
+                  0
+                )}
+                color="error"
+              >
+                <ShoppingCartIcon />
+              </Badge>
+              {/* <div className="relative top-[-10px] right-[10px] bg-red-500 rounded-full flex justify-center items-center text-xs h-5 w-5"></div> */}
             </Link>
           </div>
         </div>

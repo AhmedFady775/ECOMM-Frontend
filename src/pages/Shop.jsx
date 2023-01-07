@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { Drawer } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -24,7 +26,7 @@ const reducer = (state, action) => {
 
 function Shop() {
   const filter = () => (
-    <div className="h-[100vh] ">
+    <div className="h-[100vh]">
       <section className="flex-col flex px-6 py-10 text-black space-y-6  text-xl font-medium">
         <ul className="flex flex-col text-black space-y-8">
           <li className="flex felx-row justify-between">
@@ -53,6 +55,11 @@ function Shop() {
     error: "",
   });
 
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   const [open, setOpen] = useState(false);
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -63,7 +70,7 @@ function Shop() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get(
-          "https://ecomm-i8yz.onrender.com/products"
+          `https://ecomm-i8yz.onrender.com/products?page=${page}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
@@ -71,7 +78,7 @@ function Shop() {
       }
     };
     fetchData();
-  }, []);
+  }, [page]);
 
   return (
     <div className="sm:flex justify-center p-4 min-h-screen ">
@@ -80,7 +87,7 @@ function Shop() {
       ) : error ? (
         <div> {error}</div>
       ) : (
-        <div className="flex flex-col w-[80%]">
+        <div className="flex flex-col lg:w-[80%]">
           <section className="border-b-2 border-gray-100 pb-4">
             <Link to="/">Home</Link> <KeyboardArrowRight />{" "}
             <strong>Shop</strong>
@@ -98,10 +105,21 @@ function Shop() {
           </section>
           <section className="flex py-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {product.map((product) => (
+              {product.products.map((product) => (
                 <ProductsCard product={product} key={product.id} />
               ))}
             </div>
+          </section>
+          <section className="flex justify-center">
+            <Stack spacing={2}>
+              <Pagination
+                shape="rounded"
+                size="large"
+                count={product.count}
+                page={page}
+                onChange={handleChange}
+              />
+            </Stack>
           </section>
         </div>
       )}

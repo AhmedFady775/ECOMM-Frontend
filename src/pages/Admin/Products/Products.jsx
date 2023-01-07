@@ -159,7 +159,7 @@ export default function Products() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {product.map((product) => (
+                  {product.products.map((product) => (
                     <StyledTableRow>
                       <StyledTableCell align="center">
                         {product._id}
@@ -194,7 +194,7 @@ export default function Products() {
               </Table>
             </TableContainer>
             <div className="flex flex-col sm:hidden">
-              {product.map((product) => (
+              {product.products.map((product) => (
                 <div className="flex flex-col border-b-2 py-2">
                   <strong>{product.createdAt.substring(0, 10)}</strong>
                   <strong>ID: {product._id}</strong>

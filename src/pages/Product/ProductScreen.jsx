@@ -68,8 +68,8 @@ function ProductScreen() {
   ) : error ? (
     <div> {error} </div>
   ) : (
-    <div className="flex justify-center">
-      <div className="flex flex-col w-[80%] p-4 bg-white min-h-screen">
+    <div className="flex flex-col lg:items-center">
+      <div className="flex flex-col lg:w-[80%] p-4 bg-white min-h-screen">
         <section className="border-b-2 border-gray-100 pb-4">
           <Link to="/">Home</Link> <KeyboardArrowRight />
           <Link to="/shop">Shop</Link>

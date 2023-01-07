@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useContext, useReducer, useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../../components/Loading/Loading";
 import { Store } from "../../components/Store";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -38,8 +38,11 @@ export default function Profile() {
       return;
     }
     try {
+      dispatch({
+        type: "UPDATE_REQUEST",
+      });
       const { data } = await axios.put(
-        "/api/users/profile",
+        "https://ecomm-i8yz.onrender.com/users/edit",
         {
           firstName,
           lastName,
@@ -65,9 +68,9 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex flex-col p-4 min-h-screen">
+    <div className="flex flex-col lg:items-center p-4 min-h-screen">
       <strong className="text-lg mt-2 mb-4">User Profile</strong>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className="lg:w-[30%]">
         <div className="inputCont" controlId="name">
           <label className="inputlabel">First name</label>
           <input
@@ -113,13 +116,21 @@ export default function Profile() {
           />
         </div>
         <div className="flex flex-col py-4">
-          <button
-            className="flex flex-row justify-center px-4 py-2 text-white bg-teal-500 rounded"
-            type="submit"
-          >
-            Update
-          </button>
-          {loadingUpdate && <Loading></Loading>}
+          {loadingUpdate ? (
+            <button
+              className="bg-slate-300 text-white py-2 px-6 rounded flex justify-center items-center"
+              type="submit"
+            >
+              <CircularProgress size={25} thickness={4} color="inherit" />
+            </button>
+          ) : (
+            <button
+              className="bg-teal-500 text-white py-2 px-6 rounded"
+              type="submit"
+            >
+              Update
+            </button>
+          )}
         </div>
       </form>
     </div>

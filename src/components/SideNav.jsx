@@ -17,20 +17,6 @@ function SideNav() {
   const { userInfo } = state;
   const { dispatch: ctxDispatch } = useContext(Store);
 
-  const [dropdown, setDropdown] = useState(false);
-  const [Usersdropdown, setUsersdropdown] = useState(false);
-  const [Ordersdropdown, setOrdersdropdown] = useState(false);
-
-  const handleDropdown = () => {
-    setDropdown((current) => !current);
-  };
-  const handleUsersDropdown = () => {
-    setUsersdropdown((current) => !current);
-  };
-  const handleOrdersDropdown = () => {
-    setOrdersdropdown((current) => !current);
-  };
-
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
