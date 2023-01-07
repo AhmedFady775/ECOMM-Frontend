@@ -142,7 +142,7 @@ function ShopNav() {
                   <div className="flex flex-row">
                     <PersonIcon />
                     {isHovering && (
-                      <div className="flex flex-col bg-white text-black absolute top-[55px] right-[10px] lg:right-[140px] rounded py-2 w-[150px] shadow z-10">
+                      <div className="flex flex-col bg-white text-black absolute top-[55px] rounded py-2 w-[150px] shadow z-10">
                         <Link to="/user/profile" className="dropDown">
                           Profile
                         </Link>
@@ -155,12 +155,14 @@ function ShopNav() {
                         <Link to="/user/returns" className="dropDown">
                           Returns{" "}
                         </Link>
-                        <div
+                        <Link
+                          to="/signin"
                           onClick={signoutHandler}
                           className="flex justify-center pt-2 hover:text-slate-400 border-slate-300 border-t-[1px] text-sm text-slate-500"
                         >
+                          {" "}
                           Sign out
-                        </div>
+                        </Link>
                       </div>
                     )}
                   </div>

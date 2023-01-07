@@ -68,8 +68,8 @@ function ProductScreen() {
   ) : error ? (
     <div> {error} </div>
   ) : (
-    <>
-      <div className="flex flex-col p-4 bg-white min-h-screen">
+    <div className="flex justify-center">
+      <div className="flex flex-col w-[80%] p-4 bg-white min-h-screen">
         <section className="border-b-2 border-gray-100 pb-4">
           <Link to="/">Home</Link> <KeyboardArrowRight />
           <Link to="/shop">Shop</Link>
@@ -83,7 +83,7 @@ function ProductScreen() {
               alt={product.id}
             />
           </div>
-          <div className="flex flex-col lg:pl-60 lg:w-[50%]">
+          <div className="flex flex-col lg:pl-44 lg:w-[50%]">
             <p className="text-xl lg:pt-0 pt-4">{product.name}</p>
             <strong className="text-xl pt-2 pb-6">{product.price} EGP</strong>
             <p className="flex py-2 text-xl font-medium">Descreption</p>
@@ -119,7 +119,7 @@ function ProductScreen() {
           Add to cart
         </button>
       </div>
-    </>
+    </div>
   );
 }
 export default ProductScreen;

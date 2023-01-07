@@ -1,11 +1,25 @@
 import Axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useReducer } from "react";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Store } from "../../components/Store";
 import mobileLogin from "../../../src/assets/loginPic-01.png";
+import CircularProgress from "@mui/material/CircularProgress";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN_REQUEST":
+      return { ...state, loading: true };
+    case "LOGIN_SUCCESS":
+      return { ...state, loading: false };
+    case "LOGIN_FAIL":
+      return { ...state, loading: false };
+    default:
+      return state;
+  }
+};
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -20,9 +34,14 @@ export default function SignIn() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+  const [{ loading }, dispatch] = useReducer(reducer, {
+    loading: false,
+  });
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      dispatch({ type: "LOGIN_REQUEST" });
+
       const { data } = await Axios.post(
         "https://ecomm-i8yz.onrender.com/auth/login",
         {
@@ -32,10 +51,12 @@ export default function SignIn() {
       );
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
-      toast.success("Logged in");
+      dispatch({ type: "LOGIN_SUCCESS" });
       navigate(redirect || "/shop");
+      toast.success("Logged in");
     } catch (error) {
-      toast.error("Wrong Password");
+      dispatch({ type: "LOGIN_FAIL" });
+      toast.error("Wrong E-Mail or Password");
     }
   };
 
@@ -78,12 +99,21 @@ export default function SignIn() {
             </div>
           </div>
           <div className="flex flex-col">
-            <button
-              className="bg-teal-500 text-white py-2 px-6 rounded"
-              type="submit"
-            >
-              Sign In
-            </button>
+            {loading ? (
+              <button
+                className="bg-slate-300 text-white py-2 px-6 rounded flex justify-center items-center"
+                type="submit"
+              >
+                <CircularProgress size={25} thickness={4} color="inherit" />
+              </button>
+            ) : (
+              <button
+                className="bg-teal-500 text-white py-2 px-6 rounded"
+                type="submit"
+              >
+                Sign In
+              </button>
+            )}
           </div>
           <div className="flex mt-10">
             New customer?{" "}
