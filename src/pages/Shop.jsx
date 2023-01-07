@@ -70,7 +70,7 @@ function Shop() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get(
-          `https://ecomm-i8yz.onrender.com/products?page=${page}`
+          `http://localhost:3001/products?page=${page}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
@@ -105,7 +105,7 @@ function Shop() {
           </section>
           <section className="flex py-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {product.products.map((product) => (
+              {product.products?.map((product) => (
                 <ProductsCard product={product} key={product.id} />
               ))}
             </div>
