@@ -13,7 +13,7 @@ export default function Home() {
           <div className="h-[50vh] w-full">
             <img className="h-full w-full object-cover" src={Hero} />
           </div>
-          <div className="absolute text-white top-[35%] left-[50%] text-4xl translate-x-[-50%] translate-y-[-50%] w-[60%] text-center font-semibold">
+          <div className="absolute text-white top-[35%] left-[50%] text-2xl lg:text-4xl translate-x-[-50%] translate-y-[-50%] w-[80%] lg:w-[60%] text-center font-semibold">
             <p className="">
               Welcome to our shopping market where you can shop diverse kinds of
               electronics.
