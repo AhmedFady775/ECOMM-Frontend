@@ -95,12 +95,12 @@ function AdminTopBar() {
             <li className="nav-item">
               <NavLink
                 onClick={toggleDrawer(false)}
-                to="/dashboard"
+                to="/admin/dashboard"
                 className={
-                  location.pathname === "/dashboard" ||
-                  "/users" ||
-                  "/orders" ||
-                  "/products"
+                  location.pathname === "/admin/dashboard" ||
+                  "/admin/users" ||
+                  "/admin/orders" ||
+                  "/admin/products"
                     ? "active"
                     : null
                 }
@@ -124,9 +124,9 @@ function AdminTopBar() {
           </Drawer>
         </li>
         <li>
-          {location.pathname === "/dashboard" ? (
+          {location.pathname === "/admin/dashboard" ? (
             <p className="text-3xl font-semibold">Dashboard </p>
-          ) : location.pathname === "/products" ? (
+          ) : location.pathname === "/admin/products" ? (
             <>
               <p
                 onClick={() => {
@@ -138,16 +138,16 @@ function AdminTopBar() {
               </p>
               {products && (
                 <div className="flex flex-col bg-white text-black absolute top-[70px] rounded py-2 w-[160px] shadow z-10">
-                  <Link to="/products" className="dropDown">
+                  <Link to="/admin/products" className="dropDown">
                     Manage Products
                   </Link>
-                  <Link to="/createproduct" className="dropDown">
+                  <Link to="/admin/createproduct" className="dropDown">
                     Create Product
                   </Link>
                 </div>
               )}
             </>
-          ) : location.pathname === "/users" ? (
+          ) : location.pathname === "/admin/users" ? (
             <>
               <p
                 onClick={() => {
@@ -159,16 +159,16 @@ function AdminTopBar() {
               </p>
               {users && (
                 <div className="flex flex-col bg-white text-black absolute top-[70px] rounded py-2 w-[160px] shadow z-10">
-                  <Link to="/products" className="dropDown">
+                  <Link to="/admin/products" className="dropDown">
                     Manage Users
                   </Link>
-                  <Link to="/createproduct" className="dropDown">
+                  <Link to="/admin/createproduct" className="dropDown">
                     Create Users
                   </Link>
                 </div>
               )}
             </>
-          ) : location.pathname === "/orders" ? (
+          ) : location.pathname === "/admin/orders" ? (
             <>
               <p
                 onClick={() => {
@@ -180,10 +180,10 @@ function AdminTopBar() {
               </p>
               {orders && (
                 <div className="flex flex-col bg-white text-black absolute top-[70px] rounded py-2 w-[160px] shadow z-10">
-                  <Link to="/products" className="dropDown">
+                  <Link to="/admin/products" className="dropDown">
                     Manage Users
                   </Link>
-                  <Link to="/createproduct" className="dropDown">
+                  <Link to="/admin/createproduct" className="dropDown">
                     Create Users
                   </Link>
                 </div>

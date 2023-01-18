@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "react-toastify";
-import Loading from "../../../components/Loading/Loading";
 import { Store } from "../../../components/Store";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import LinearProgress from "@mui/joy/LinearProgress";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -261,7 +261,7 @@ function CreateProduct() {
                   onChange={(e) => uploadFileHandler(e, true)}
                 />
               </div>
-              {loadingUpload && <Loading />}
+              {loadingUpload && <LinearProgress />}
               {images.length === 0 && (
                 <div className="flex flex-row w-full justify-center py-4">
                   <strong>No images</strong>

@@ -11,6 +11,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import LinearProgress from "@mui/joy/LinearProgress";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CreateIcon from "@mui/icons-material/Create";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -20,6 +22,19 @@ const reducer = (state, action) => {
       return { ...state, users: action.payload, loading: false };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    case "DELETE_REQUEST":
+      return { ...state, loadingDelete: true, successDelete: false };
+    case "DELETE_SUCCESS":
+      return {
+        ...state,
+        loadingDelete: false,
+        successDelete: true,
+      };
+    case "DELETE_FAIL":
+      return { ...state, loadingDelete: false, successDelete: false };
+
+    case "DELETE_RESET":
+      return { ...state, loadingDelete: false, successDelete: false };
     default:
       return state;
   }
@@ -30,30 +45,52 @@ export default function Users() {
   const { userInfo } = state;
   const navigate = useNavigate();
 
-  const [{ loading, error, users }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: "",
-  });
-  useEffect(() => {
-    const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
+  const [{ loading, error, users, loadingDelete, successDelete }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: "",
+    });
+
+  const deleteHandler = async (users) => {
+    if (window.confirm("Are you sure to delete?")) {
       try {
-        const { data } = await axios.get(
-          "https://ecomm-i8yz.onrender.com/users",
+        await axios.delete(
+          `https://ecomm-i8yz.onrender.com/users/${users._id}`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
         );
-        dispatch({ type: "FETCH_SUCCESS", payload: data });
-      } catch (error) {
+        dispatch({ type: "DELETE_SUCCESS" });
+        toast.success("product successfully deleted");
+      } catch (err) {
+        toast.error(getError(error));
         dispatch({
-          type: "FETCH_FAIL",
-          payload: error,
+          type: "DELETE_FAIL",
         });
       }
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://ecomm-i8yz.onrender.com/users`,
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+
+        dispatch({ type: "FETCH_SUCCESS", payload: data });
+      } catch (err) {}
     };
-    fetchData();
-  }, [userInfo]);
+
+    if (successDelete) {
+      dispatch({ type: "DELETE_RESET" });
+    } else {
+      fetchData();
+    }
+  }, [userInfo, successDelete]);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -82,16 +119,19 @@ export default function Users() {
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell align="center">DATE</StyledTableCell>
-                    <StyledTableCell align="center">TOTAL</StyledTableCell>
-                    <StyledTableCell align="center">PAID</StyledTableCell>
-                    <StyledTableCell align="center">DELIVERED</StyledTableCell>
+                    <StyledTableCell align="center">CREATED AT</StyledTableCell>
+                    <StyledTableCell align="center">FIRST NAME</StyledTableCell>
+                    <StyledTableCell align="center">LAST NAME</StyledTableCell>
+                    <StyledTableCell align="center">EMAIL</StyledTableCell>
                     <StyledTableCell align="center">ACTIONS</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {users.map((user) => (
                     <StyledTableRow>
+                      <StyledTableCell align="center">
+                        {user.createdAt}
+                      </StyledTableCell>
                       <StyledTableCell align="center">
                         {user.firstName}
                       </StyledTableCell>
@@ -102,13 +142,16 @@ export default function Users() {
                         {" "}
                         {user.email}
                       </StyledTableCell>
-                      <StyledTableCell align="center">
+                      <StyledTableCell className="space-x-4" align="center">
                         <button
                           onClick={() => {
-                            navigate(`/user/${user._id}`);
+                            navigate(`/product/${product._id}`);
                           }}
                         >
-                          Details
+                          <CreateIcon />
+                        </button>
+                        <button onClick={() => deleteHandler(product)}>
+                          <DeleteIcon />
                         </button>
                       </StyledTableCell>
                     </StyledTableRow>

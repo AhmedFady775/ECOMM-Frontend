@@ -5,9 +5,9 @@ function ProductsCard({ product }) {
   return (
     <div className="flex flex-col w-fit bg-white rounded-md">
       <Link className="flex" to={`/${product._id}`}>
-        <div className="h-[20vh] sm:h-[40vh]">
+        <div className="h-[20vh] sm:h-[35vh]">
           <img
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
             src={product.image}
             alt={product.title}
           />

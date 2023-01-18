@@ -1,61 +1,38 @@
-import { Link } from "react-router-dom";
-import PIC from "../assets/PIC.jpg";
-import pic1 from "../assets/1.png";
-import pic2 from "../assets/2.png";
-import pic3 from "../assets/3.png";
-import pic4 from "../assets/4.png";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
-import { Tabs } from "@mui/material";
-import { Tab } from "@mui/material";
-import { useState } from "react";
-import Loading from "../components/Loading/Loading";
-import ProductsCard from "./Product/ProductCard";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import Roadmap from "../components/MileStone";
-
-const milestones = [
-  {
-    name: "walking",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
-  },
-  {
-    name: "riding",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
-  },
-
-  {
-    name: "flying",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
-  },
-  {
-    name: "hiking",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
-  },
-  {
-    name: "playing",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec blandit leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus arcu nulla, tristique eu dolor sed, iaculis laoreet velit. Fusce malesuada tincidunt consequat. Praesent placerat, magna sed mattis aliquam, orci massa posuere lectus, eu aliquam neque arcu at ante. Nunc in lorem dapibus, iaculis turpis eget, scelerisque lorem. Nam aliquet dolor non lorem auctor faucibus. Suspendisse euismod elit non purus posuere auctor. Nam ligula risus, varius sit amet sapien et, vehicula pulvinar neque. Vivamus ac felis erat. Vivamus tempor imperdiet mi eget egestas. Quisque faucibus sagittis orci. Phasellus mollis et elit sit amet aliquet. Quisque id dui cursus, efficitur odio a, mattis enim. Maecenas nec elit sem.",
-  },
-];
+import Hero from "../assets/Hero.jpg";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <>
+    <div className="flex flex-col">
       <Navbar />
-      <div className="md:flex md:items-center md:justify-center">
-        <div className="flex flex-col ">
-          <div className="flex justify-center font-bold text-3xl py-10 lg:20">
-            Landing page
+      <div className="flex flex-col min-h-screen ">
+        <section className="flex flex-col">
+          <div className="h-[50vh] w-full">
+            <img className="h-full w-full object-cover" src={Hero} />
           </div>
-        </div>
+          <div className="absolute text-white top-[35%] left-[50%] text-4xl translate-x-[-50%] translate-y-[-50%] w-[60%] text-center font-semibold">
+            <p className="">
+              Welcome to our shopping market where you can shop diverse kinds of
+              electronics.
+            </p>
+            <KeyboardDoubleArrowDownIcon
+              sx={{ fontSize: 30 }}
+              className="knowMoreAboutMeArrow mt-4"
+            />
+            <div className="flex justify-center mt-8">
+              <Link to="/shop">
+                <button className="px-8 py-2 font-semibold text-black text-xl rounded shadow bg-white">
+                  SHOP NOW
+                </button>
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

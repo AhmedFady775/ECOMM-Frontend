@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Store } from "../../../components/Store";
-import Loading from "../../../components/Loading/Loading";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -82,7 +81,7 @@ export default function Products() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `https://ecomm-i8yz.onrender.com/products`,
+          `https://ecomm-i8yz.onrender.com/products/allproducts`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

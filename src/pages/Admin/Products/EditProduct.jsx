@@ -189,7 +189,7 @@ export default function EditProduct() {
         </div>
 
         {loading ? (
-          <Loading />
+          <LinearProgress />
         ) : error ? (
           { error }
         ) : (
@@ -289,7 +289,8 @@ export default function EditProduct() {
                   multiple
                   onChange={uploadFileHandler}
                 />
-                {loadingUpload && <Loading />}
+                {loadingUpload && <LinearProgress
+ />}
               </div>
               {image.length === 0 ? (
                 <strong>No image</strong>
@@ -314,7 +315,8 @@ export default function EditProduct() {
                   onChange={(e) => uploadFileHandler(e, true)}
                 />
               </div>
-              {loadingUpload && <Loading />}
+              {loadingUpload && <LinearProgress
+ />}
               {images.length === 0 && <strong>No image</strong>}
               <div className="imagesWrappercont">
                 <div className="imagesWrapper">
@@ -349,7 +351,8 @@ export default function EditProduct() {
                   multiple
                   onChange={(e) => uploadFileHandler1(e, true)}
                 />
-                {loadingUpload && <Loading />}
+                {loadingUpload && <LinearProgress
+ />}
               </div>
               {videos.length === 0 && <strong>No Videos</strong>}
               <div className="imagesWrappercont">
@@ -374,7 +377,7 @@ export default function EditProduct() {
               <button disabled={loadingUpdate} type="submit">
                 Update
               </button>
-              {loadingUpdate && <Loading />}
+              {loadingUpdate && <LinearProgress />}
             </div>
           </form>
         )}

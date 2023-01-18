@@ -2,8 +2,7 @@ import { useContext, useEffect, useReducer } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import CheckoutSteps from "../../components/CheckoutSteps";
-import Loading from "../../components/Loading/Loading";
+import LinearProgress from "@mui/joy/LinearProgress";
 import { Store } from "../../components/Store";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Stepper, Step, StepLabel } from "@mui/material";
@@ -76,11 +75,11 @@ export default function PlaceOrderScreen() {
   }, [cart, navigate]);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen items-center">
       {loading ? (
-        <Loading />
+        <LinearProgress />
       ) : (
-        <div className="flex flex-col p-4 min-h-screen">
+        <div className="flex flex-col p-4 w-[60%]">
           <section className="flex flex-row border-b-2 border-gray-100 pb-4 w-full">
             <Link to="/">Home</Link>
             <KeyboardArrowRight />
@@ -192,15 +191,15 @@ export default function PlaceOrderScreen() {
             </div>
             <div className="flex flex-col py-4">
               <button
-                className="flex flex-row justify-center px-4 py-2 text-white bg-teal-500 rounded"
+                className="bg-teal-500 text-white py-2 px-6 rounded"
                 type="submit"
               >
-                Place order
+                Place Order
               </button>
             </div>
           </form>
         </div>
       )}
-    </>
+    </div>
   );
 }

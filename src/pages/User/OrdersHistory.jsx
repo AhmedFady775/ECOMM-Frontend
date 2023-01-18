@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../../components/Store";
-import Loading from "../../components/Loading/Loading";
+import LinearProgress from "@mui/joy/LinearProgress";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -74,7 +74,7 @@ export default function OrdersHistory() {
     <div className="flex flex-col lg:items-center p-4 min-h-screen">
       <strong className="text-lg mt-2 mb-4">Orders history</strong>
       {loading ? (
-        <Loading />
+        <LinearProgress />
       ) : error ? (
         { error }
       ) : (

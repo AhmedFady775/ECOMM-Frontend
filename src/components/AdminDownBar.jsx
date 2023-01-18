@@ -19,34 +19,34 @@ function AdminDownBar() {
     <nav className="bottom-0 px-6 py-4 bg-white sticky shadow border-t-2 lg:hidden">
       <ul className="flex flex-row items-center justify-between">
         <li className="flex">
-          {location.pathname === "/dashboard" ? (
-            <Link to="/dashboard">
+          {location.pathname === "/admin/dashboard" ? (
+            <Link to="/admin/dashboard">
               <GridViewTwoToneIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           ) : (
-            <Link to="/dashboard">
+            <Link to="/admin/dashboard">
               <GridViewOutlinedIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           )}
         </li>
         <li className="flex">
-          {location.pathname === "/products" ? (
-            <Link to="/products">
+          {location.pathname === "/admin/products" ? (
+            <Link to="/admin/products">
               <Inventory2TwoToneIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           ) : (
-            <Link to="/products">
+            <Link to="/admin/products">
               <Inventory2OutlinedIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           )}
         </li>
         <li className="flex">
-          {location.pathname === "/orders" ? (
-            <Link to="/orders">
+          {location.pathname === "/admin/orders" ? (
+            <Link to="/admin/orders">
               <LocalShippingTwoToneIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           ) : (
-            <Link to="/orders">
+            <Link to="/admin/orders">
               <LocalShippingOutlinedIcon
                 color="primary"
                 sx={{ fontSize: 30 }}
@@ -55,23 +55,23 @@ function AdminDownBar() {
           )}
         </li>
         <li className="flex">
-          {location.pathname === "/users" ? (
-            <Link to="/users">
+          {location.pathname === "/admin/users" ? (
+            <Link to="/admin/users">
               <PeopleAltTwoToneIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           ) : (
-            <Link to="/users">
+            <Link to="/admin/users">
               <PeopleAltOutlinedIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           )}
         </li>
         <li className="flex">
-          {location.pathname === "/settings" ? (
-            <Link to="/users">
+          {location.pathname === "/admin/settings" ? (
+            <Link to="/admin/users">
               <SettingsTwoToneIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           ) : (
-            <Link to="/users">
+            <Link to="/admin/users">
               <SettingsOutlinedIcon color="primary" sx={{ fontSize: 30 }} />
             </Link>
           )}

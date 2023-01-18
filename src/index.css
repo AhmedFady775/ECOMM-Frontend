@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +7,28 @@
 body {
   padding: 0;
   margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.knowMoreAboutMeArrow {
+  animation-name: knowMoreAboutMe;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  margin-bottom: 2rem;
+  animation-direction: alternate;
+}
+
+@keyframes knowMoreAboutMe {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(50px);
+  }
+}
+
+.knowMoreAboutMe:hover {
+  color: rgba(0, 0, 0, 0.616);
 }
 
 .inputCont {

@@ -1,11 +1,14 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/footer";
+import React, { lazy, Suspense, useEffect } from "react";
 import Home from "./pages/Home";
+import LinearProgress from "@mui/joy/LinearProgress";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "../src/pages/Auth/SignUp";
 import ProductScreen from "./pages/Product/ProductScreen";
-import Shop from "./pages/Shop";
+// import Shop from "./pages/Shop";
+const Shop = lazy(() => import("./pages/Shop"));
 import Cart from "./pages/Cart";
 import ShopNav from "./components/ShopNav";
 import ShippingAddressScreen from "./pages/Shipping/ShippingAddressScreen";
@@ -26,27 +29,69 @@ import Users from "./pages/Admin/Users/Users";
 import Products from "./pages/Admin/Products/Products";
 import Orders from "./pages/Admin/Orders/Orders";
 import CreateProduct from "./pages/Admin/Products/CreateProduct";
+import AdminRoute from "./components/AdminRoute";
 
 const App = () => {
   const location = useLocation();
 
+  useEffect(() => {
+    if (location.pathname !== "/shop") {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
+
   if (
-    location.pathname === "/dashboard" ||
-    location.pathname === "/products" ||
-    location.pathname === "/users" ||
-    location.pathname === "/createproduct" ||
-    location.pathname === "/orders"
+    location.pathname === "/admin/dashboard" ||
+    location.pathname === "/admin/products" ||
+    location.pathname === "/admin/users" ||
+    location.pathname === "/admin/createproduct" ||
+    location.pathname === "/admin/orders"
   ) {
     return (
       <div className="flex flex-col lg:flex-row">
         <SideNav />
         <AdminTopBar />
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/createproduct" element={<CreateProduct />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/orders" element={<Orders />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <AdminRoute>
+                <Products />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/createproduct"
+            element={
+              <AdminRoute>
+                <CreateProduct />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <AdminRoute>
+                <Users />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              <AdminRoute>
+                <Orders />
+              </AdminRoute>
+            }
+          />
         </Routes>
         <AdminDownBar />
         <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
@@ -56,60 +101,62 @@ const App = () => {
 
   if (
     location.pathname !== "/signin" &&
+    location.pathname !== "/" &&
     location.pathname !== "/signup" &&
-    location.pathname !== "/dashboard" &&
-    location.pathname !== "/products" &&
-    location.pathname !== "/users" &&
-    location.pathname !== "/createproduct" &&
-    location.pathname !== "/orders"
+    location.pathname !== "/admin/dashboard" &&
+    location.pathname !== "/admin/products" &&
+    location.pathname !== "/admin/users" &&
+    location.pathname !== "/admin/createproduct" &&
+    location.pathname !== "/admin/orders"
   ) {
     return (
       <div>
-        <ShopNav />
-        <Routes>
-          <Route
-            path="/user/returns"
-            element={
-              <ProtectedRoute>
-                <Return />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/user/payments"
-            element={
-              <ProtectedRoute>
-                <Payments />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/user/ordershistory"
-            element={
-              <ProtectedRoute>
-                <OrdersHistory />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/user/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
-          <Route path="/:id" element={<ProductScreen />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="/Cart" element={<Cart />} />
-          <Route path="/payment" element={<PaymentMethodScreen />}></Route>
-          <Route path="/placeorder" element={<PlaceOrderScreen />} />
-          <Route path="/order/:id" element={<OrderScreen />}></Route>
-          <Route path="/" element={<Shop />} />
-        </Routes>
-        <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
-        <Footer />
+        <Suspense fallback={<LinearProgress />}>
+          <ShopNav />
+          <Routes>
+            <Route
+              path="/user/returns"
+              element={
+                <ProtectedRoute>
+                  <Return />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user/payments"
+              element={
+                <ProtectedRoute>
+                  <Payments />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user/ordershistory"
+              element={
+                <ProtectedRoute>
+                  <OrdersHistory />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
+            <Route path="/:id" element={<ProductScreen />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/Cart" element={<Cart />} />
+            <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+            <Route path="/placeorder" element={<PlaceOrderScreen />} />
+            <Route path="/order/:id" element={<OrderScreen />}></Route>
+          </Routes>
+          <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
+          <Footer />
+        </Suspense>
       </div>
     );
   }
@@ -119,6 +166,7 @@ const App = () => {
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/" element={<Home />} />
       </Routes>
       <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
     </div>

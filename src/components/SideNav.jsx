@@ -32,9 +32,11 @@ function SideNav() {
       </Link>
       <ul className="hidden sm:flex flex-col space-y-4 mx-8">
         <Link
-          to="/dashboard"
+          to="/admin/dashboard"
           className={
-            location.pathname === "/dashboard" ? "activated" : "notActivated"
+            location.pathname === "/admin/dashboard"
+              ? "activated"
+              : "notActivated"
           }
         >
           <div className="flex flex-row items-center">
@@ -44,9 +46,11 @@ function SideNav() {
         </Link>
 
         <Link
-          to="/products"
+          to="/admin/products"
           className={
-            location.pathname === "/products" ? "activated" : "notActivated"
+            location.pathname === "/admin/products"
+              ? "activated"
+              : "notActivated"
           }
         >
           <div className="flex flex-row items-center">
@@ -56,9 +60,9 @@ function SideNav() {
         </Link>
 
         <Link
-          to="/orders"
+          to="/admin/orders"
           className={
-            location.pathname === "/orders" ? "activated" : "notActivated"
+            location.pathname === "/admin/orders" ? "activated" : "notActivated"
           }
         >
           <div className="flex flex-row items-center">
@@ -67,9 +71,9 @@ function SideNav() {
           </div>
         </Link>
         <Link
-          to="/users"
+          to="/admin/users"
           className={
-            location.pathname === "/users" ? "activated" : "notActivated"
+            location.pathname === "/admin/users" ? "activated" : "notActivated"
           }
         >
           <div className="flex flex-row items-center">
@@ -78,9 +82,11 @@ function SideNav() {
           </div>
         </Link>
         <Link
-          to="/settings"
+          to="/admin/settings"
           className={
-            location.pathname === "/settings" ? "activated" : "notActivated"
+            location.pathname === "/admin/settings"
+              ? "activated"
+              : "notActivated"
           }
         >
           <div className="flex flex-row items-center">

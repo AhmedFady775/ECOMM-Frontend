@@ -62,7 +62,6 @@ function Cart() {
             </p>
             <Link to="/shop">
               <button className="bg-teal-500 rounded text-white lg:text-xl px-12 py-2">
-                {" "}
                 Go Shopping
               </button>
             </Link>
@@ -182,13 +181,20 @@ function Cart() {
           </div>
 
           <div className="flex flex-col">
-            <button
-              className="flex flex-row justify-center px-8 py-3 lg:text-xl text-white bg-teal-500 rounded"
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#26a69a",
+                "&:hover": {
+                  backgroundColor: "#33ab9f",
+                },
+              }}
+              size="large"
               onClick={checkoutHandler}
             >
               Procced to checkout (
               {cartItems.reduce((a, c) => a + c.quantity, 0)} items)
-            </button>
+            </Button>
           </div>
         </div>
       )}
