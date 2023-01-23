@@ -15,6 +15,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "react-toastify";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Button } from "@mui/material";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -122,7 +123,7 @@ export default function Products() {
           <LinearProgress />
         ) : (
           <div className="flex flex-col">
-            <div className="flex flex-col cursor-pointer mb-4">
+            <div className="hidden md:flex flex-col cursor-pointer mb-4">
               <div
                 onClick={() => setChoose(!choose)}
                 className="flex flex-row items-end  mb-2"
@@ -149,7 +150,7 @@ export default function Products() {
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell align="center">ID</StyledTableCell>
+                    <StyledTableCell align="center">Image</StyledTableCell>
                     <StyledTableCell align="center">CREATED AT</StyledTableCell>
                     <StyledTableCell align="center">SLUG</StyledTableCell>
                     <StyledTableCell align="center">PRICE</StyledTableCell>
@@ -161,7 +162,9 @@ export default function Products() {
                   {product.products.map((product) => (
                     <StyledTableRow>
                       <StyledTableCell align="center">
-                        {product._id}
+                        <div className="flex justify-center">
+                          <img src={product.image} width={200} />
+                        </div>
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {product.createdAt.substring(0, 10)}{" "}
@@ -197,26 +200,32 @@ export default function Products() {
                 <div className="flex flex-col border-b-2 py-2">
                   <strong>{product.createdAt.substring(0, 10)}</strong>
                   <strong>ID: {product._id}</strong>
-                  <div>SlUG: {product.slug}</div>
-                  <div>PAID: {product.price}</div>
-                  <div>DELIVERED: {product.name}</div>
-                  <div>
-                    <button
-                      className="px-6 py-2 text-white bg-teal-500 rounded my-2"
+                  <div className="my-4">
+                    <img src={product.image} />
+                  </div>
+                  <div>SLUG: {product.slug}</div>
+                  <div>PRICE: {product.price}</div>
+                  <div>QUANTATIY: {product.countInStock}</div>
+
+                  <div className="flex flex-row mt-4 ">
+                    <Button
+                      variant="contained"
+                      sx={{ marginRight: 2 }}
+                      size="small"
                       onClick={() => {
                         navigate(`/product/${product._id}`);
                       }}
                     >
-                      <CreateIcon />
-                    </button>
-                    <button
-                      className="px-6 py-2 text-white bg-teal-500 rounded my-2"
-                      onClick={() => {
-                        navigate(`/product/${product._id}`);
-                      }}
+                      edit{" "}
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      color="error"
+                      onClick={() => deleteHandler(product)}
                     >
-                      <DeleteIcon />
-                    </button>
+                      delete{" "}
+                    </Button>
                   </div>
                 </div>
               ))}

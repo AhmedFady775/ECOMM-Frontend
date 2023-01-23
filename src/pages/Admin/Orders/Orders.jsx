@@ -72,7 +72,7 @@ export default function Orders() {
   }));
 
   return (
-    <div className="flex flex-col p-4 lg:w-[85vw]">
+    <div className="flex flex-col min-h-screen p-4 lg:w-[85vw]">
       <div>
         {loading ? (
           <LinearProgress />

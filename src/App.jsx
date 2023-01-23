@@ -30,6 +30,7 @@ import Products from "./pages/Admin/Products/Products";
 import Orders from "./pages/Admin/Orders/Orders";
 import CreateProduct from "./pages/Admin/Products/CreateProduct";
 import AdminRoute from "./components/AdminRoute";
+import NoPage from "./pages/Nopage";
 
 const App = () => {
   const location = useLocation();
@@ -147,12 +148,20 @@ const App = () => {
               }
             />
             <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
-            <Route path="/:id" element={<ProductScreen />} />
+            <Route path="/products/:id" element={<ProductScreen />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/Cart" element={<Cart />} />
             <Route path="/payment" element={<PaymentMethodScreen />}></Route>
             <Route path="/placeorder" element={<PlaceOrderScreen />} />
             <Route path="/order/:id" element={<OrderScreen />}></Route>
+            <Route
+              path="*"
+              element={
+                <div className="flex min-h-[95vh] justify-center font-semibold items-center text-3xl lg:text-5xl">
+                  Page not found 404
+                </div>
+              }
+            />
           </Routes>
           <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
           <Footer />
