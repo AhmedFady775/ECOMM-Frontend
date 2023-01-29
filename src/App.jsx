@@ -30,7 +30,6 @@ import Products from "./pages/Admin/Products/Products";
 import Orders from "./pages/Admin/Orders/Orders";
 import CreateProduct from "./pages/Admin/Products/CreateProduct";
 import AdminRoute from "./components/AdminRoute";
-import NoPage from "./pages/Nopage";
 
 const App = () => {
   const location = useLocation();
