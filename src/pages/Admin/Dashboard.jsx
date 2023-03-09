@@ -33,7 +33,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          "https://ecomm-i8yz.onrender.com/orders/summary",
+          "https://ecomm12.herokuapp.com/orders/summary",
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

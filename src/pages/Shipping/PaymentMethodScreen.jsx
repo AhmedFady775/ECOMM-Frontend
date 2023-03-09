@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CheckoutSteps from "../../components/CheckoutSteps";
 import { Store } from "../../components/Store";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Link } from "react-router-dom";
@@ -29,7 +28,7 @@ export default function PaymentMethodScreen() {
     navigate("/placeorder");
   };
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col lg:items-center">
       <div className="flex flex-col p-4 min-h-screen lg:w-[60%]">
         <section className="flex flex-row border-b pb-4 w-full">
           <Link to="/">Home</Link>

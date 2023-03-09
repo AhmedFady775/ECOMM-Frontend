@@ -50,7 +50,7 @@ export default function ShippingAddressScreen() {
     navigate("/payment");
   };
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col lg:items-center">
       <div className="flex flex-col p-4 min-h-screen lg:w-[60%]">
         <section className="flex flex-row border-b-2 border-gray-100 pb-4 w-full">
           <Link to="/">Home</Link>

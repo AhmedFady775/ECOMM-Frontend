@@ -62,7 +62,7 @@ export default function Products() {
     if (window.confirm("Are you sure to delete?")) {
       try {
         await axios.delete(
-          `https://ecomm-i8yz.onrender.com/products/${product._id}`,
+          `https://ecomm12.herokuapp.com/products/${product._id}`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
@@ -82,7 +82,7 @@ export default function Products() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `https://ecomm-i8yz.onrender.com/products/allproducts`,
+          `https://ecomm12.herokuapp.com/products/allproducts`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

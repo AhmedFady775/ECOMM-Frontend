@@ -20,7 +20,7 @@ function Cart() {
 
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(
-      `https://ecomm-i8yz.onrender.com/products/${item._id}`
+      `https://ecomm12.herokuapp.com/products/${item._id}`
     );
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");

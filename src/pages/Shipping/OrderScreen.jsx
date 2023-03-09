@@ -38,7 +38,7 @@ export default function OrderScreen() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          `https://ecomm-i8yz.onrender.com/orders/${orderId}`,
+          `https://ecomm12.herokuapp.com/orders/${orderId}`,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }
@@ -58,11 +58,11 @@ export default function OrderScreen() {
   }, [order, userInfo, orderId, navigate]);
 
   return (
-    <div className="flex flex-col min-h-screen items-center">
+    <div className="flex flex-col min-h-screen lg:items-center">
       {loading ? (
         <LinearProgress />
       ) : (
-        <div className="flex flex-col p-4 w-[60%]">
+        <div className="flex flex-col p-4 lg:w-[60%]">
           <section className="flex flex-row border-b-2 border-gray-100 pb-4 w-full">
             <Link to="/">Home</Link>
             <KeyboardArrowRight />

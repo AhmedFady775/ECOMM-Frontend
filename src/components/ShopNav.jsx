@@ -22,6 +22,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Searchbar from "./Searchbar";
 import V2S from "../assets/V2S.png";
+import Tooltip from "@mui/material/Tooltip";
+import Search from "./Search";
 
 function ShopNav() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -55,7 +57,7 @@ function ShopNav() {
     queryKey: ["repoData"],
     queryFn: () =>
       axios
-        .get("https://ecomm-i8yz.onrender.com/products/allproducts")
+        .get("https://ecomm12.herokuapp.com/products/allproducts")
         .then((res) => res.data),
   });
 
@@ -143,8 +145,9 @@ function ShopNav() {
             {list()}
           </Drawer>
         </div>
+
         <section>
-          <Searchbar data={data?.products} />
+          <Search />
         </section>
 
         <div className="flex flex-row items-center">
@@ -153,10 +156,12 @@ function ShopNav() {
               <div className="flex">
                 <div className="cursor-pointer flex flex-col mx-4">
                   <div className="flex flex-col items-center">
-                    <AccountCircleIcon
-                      sx={{ fontSize: 30 }}
-                      onClick={handleClick}
-                    />
+                    <Tooltip title="Profile">
+                      <AccountCircleIcon
+                        sx={{ fontSize: 30 }}
+                        onClick={handleClick}
+                      />
+                    </Tooltip>
                     <Menu
                       anchorEl={anchorEl}
                       open={openDrop}

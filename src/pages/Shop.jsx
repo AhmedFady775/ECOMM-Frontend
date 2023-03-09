@@ -59,7 +59,7 @@ const Shop = () => {
   //     dispatch({ type: "FETCH_REQUEST" });
   //     try {
   //       const result = await axios.get(
-  //         `https://ecomm-i8yz.onrender.com/products?page=${page}`
+  //         `https://ecomm12.herokuapp.com/products?page=${page}`
   //       );
   //       dispatch({ type: "FETCH_SUCCESS", payload: result.data });
   //     } catch (err) {
@@ -73,7 +73,7 @@ const Shop = () => {
     queryKey: ["repoData", { page }],
     queryFn: () =>
       axios
-        .get(`https://ecomm-i8yz.onrender.com/products?page=${page}`)
+        .get(`https://ecomm12.herokuapp.com/products?page=${page}`)
         .then((res) => res.data),
   });
 

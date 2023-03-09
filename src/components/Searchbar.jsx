@@ -47,7 +47,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Searchbar({ data }) {
+export default function Searchbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);

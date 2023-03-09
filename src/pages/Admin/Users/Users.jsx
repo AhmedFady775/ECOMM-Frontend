@@ -54,12 +54,9 @@ export default function Users() {
   const deleteHandler = async (users) => {
     if (window.confirm("Are you sure to delete?")) {
       try {
-        await axios.delete(
-          `https://ecomm-i8yz.onrender.com/users/${users._id}`,
-          {
-            headers: { Authorization: `Bearer ${userInfo.token}` },
-          }
-        );
+        await axios.delete(`https://ecomm12.herokuapp.com/users/${users._id}`, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
         dispatch({ type: "DELETE_SUCCESS" });
         toast.success("product successfully deleted");
       } catch (err) {
@@ -75,7 +72,7 @@ export default function Users() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `https://ecomm-i8yz.onrender.com/users`,
+          `https://ecomm12.herokuapp.com/users`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

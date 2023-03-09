@@ -42,7 +42,7 @@ export default function Profile() {
         type: "UPDATE_REQUEST",
       });
       const { data } = await axios.put(
-        "https://ecomm-i8yz.onrender.com/users/edit",
+        "https://ecomm12.herokuapp.com/users/edit",
         {
           firstName,
           lastName,
@@ -68,9 +68,9 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex flex-col lg:items-center p-4 min-h-screen">
-      <strong className="text-lg mt-2 mb-4">User Profile</strong>
-      <form onSubmit={submitHandler} className="lg:w-[30%]">
+    <div className="flex flex-col lg:items-center p-4 lg:p-0 min-h-screen">
+      <p className="text-3xl font-semibold lg:my-10 mb-4">User Profile</p>
+      <form onSubmit={submitHandler} className="lg:w-[600px]">
         <div className="inputCont" controlId="name">
           <label className="inputlabel">First name</label>
           <input
@@ -104,6 +104,7 @@ export default function Profile() {
           <input
             className="input"
             type="password"
+            placeholder="********"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
@@ -112,6 +113,7 @@ export default function Profile() {
           <input
             className="input"
             type="password"
+            placeholder="********"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>

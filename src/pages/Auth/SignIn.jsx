@@ -2,8 +2,6 @@ import Axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState, useReducer } from "react";
 import { toast } from "react-toastify";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Store } from "../../components/Store";
 import mobileLogin from "../../../src/assets/loginPic-01.png";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -27,8 +25,6 @@ export default function SignIn() {
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/shop";
 
-  const [passwordShown, setPasswordShown] = useState(false);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -43,7 +39,7 @@ export default function SignIn() {
       dispatch({ type: "LOGIN_REQUEST" });
 
       const { data } = await Axios.post(
-        "https://ecomm-i8yz.onrender.com/auth/login",
+        "https://ecomm12.herokuapp.com/auth/login",
         {
           email,
           password,
@@ -73,9 +69,9 @@ export default function SignIn() {
           <img src={mobileLogin} className="w-[500px]" />
         </div>
 
-        <form onSubmit={submitHandler} className="w-[70%] md:w-[30%]">
+        <form onSubmit={submitHandler} className="w-[80%] md:w-[30%]">
           <p className="text-5xl font-bold text-gray-400 mb-10">SIGN IN</p>
-          <div className="flex flex-col mb-12">
+          <div className="flex flex-col mb-4">
             <label className="inputlabel">E-mail</label>
             <div className="inputCont">
               <input
@@ -92,16 +88,16 @@ export default function SignIn() {
               <input
                 className="input"
                 placeholder="Password"
-                type={passwordShown ? "text" : "password"}
+                type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             {loading ? (
               <button
-                className="bg-slate-300 text-white py-2 px-6 rounded flex justify-center items-center"
+                className="bg-slate-300 text-white py-2 px-6 rounded flex justify-center items-center "
                 type="submit"
               >
                 <CircularProgress size={25} thickness={4} color="inherit" />
@@ -115,7 +111,7 @@ export default function SignIn() {
               </button>
             )}
           </div>
-          <div className="flex mt-10">
+          <div className="flex mt-2">
             New customer?{" "}
             <Link
               className="text-sky-500 ml-2"

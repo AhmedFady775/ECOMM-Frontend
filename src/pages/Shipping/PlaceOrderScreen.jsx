@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import LinearProgress from "@mui/joy/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import { Store } from "../../components/Store";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Stepper, Step, StepLabel } from "@mui/material";
@@ -38,12 +39,12 @@ export default function PlaceOrderScreen() {
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
-  const placeOrderHandler = async () => {
+  const placeOrderHandler = async (e) => {
+    e.preventDefault();
     try {
       dispatch({ type: "CREATE_REQUEST" });
-
       const { data } = await axios.post(
-        "https://ecomm-i8yz.onrender.com/orders/create",
+        "https://ecomm12.herokuapp.com/orders/create",
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,
@@ -75,131 +76,136 @@ export default function PlaceOrderScreen() {
   }, [cart, navigate]);
 
   return (
-    <div className="flex flex-col min-h-screen items-center">
-      {loading ? (
-        <LinearProgress />
-      ) : (
-        <div className="flex flex-col p-4 w-[60%]">
-          <section className="flex flex-row border-b-2 border-gray-100 pb-4 w-full">
-            <Link to="/">Home</Link>
-            <KeyboardArrowRight />
-            <Link to="/shop">Shop</Link>
-            <KeyboardArrowRight />
-            <Link to="/Cart">Cart</Link>
-            <KeyboardArrowRight />
-            <strong>Checkout</strong>
-          </section>
-          <section className="flex py-4 w-full">
-            <Stepper className="w-full">
-              <Step completed index={2}>
-                <StepLabel>Payment</StepLabel>
-              </Step>
-              <Step index={3} active>
-                <StepLabel>Place order</StepLabel>
-              </Step>
-            </Stepper>
-          </section>
-          <p className="mt-2 mb-4">
-            <strong className="text-lg">Preview Order</strong>
-          </p>
-          <form className="flex flex-col w-full" onSubmit={placeOrderHandler}>
-            <div className="placeOrderCont">
-              <div className="placeOrderHeader">
-                <strong>Shipping</strong>
-              </div>
-              <div>
-                <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                <strong>Address: </strong> {cart.shippingAddress.address},
-                {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
-                {cart.shippingAddress.country}
-              </div>
-              <Link className="text-blue-400 underline" to="/shipping">
-                Edit
-              </Link>
+    <div className="flex flex-col min-h-screen lg:items-center">
+      <div className="flex flex-col p-4 lg:w-[60%]">
+        <section className="flex flex-row border-b-2 border-gray-100 pb-4 w-full">
+          <Link to="/">Home</Link>
+          <KeyboardArrowRight />
+          <Link to="/shop">Shop</Link>
+          <KeyboardArrowRight />
+          <Link to="/Cart">Cart</Link>
+          <KeyboardArrowRight />
+          <strong>Checkout</strong>
+        </section>
+        <section className="flex py-4 w-full">
+          <Stepper className="w-full">
+            <Step completed index={2}>
+              <StepLabel>Payment</StepLabel>
+            </Step>
+            <Step index={3} active>
+              <StepLabel>Place order</StepLabel>
+            </Step>
+          </Stepper>
+        </section>
+        <p className="mt-2 mb-4">
+          <strong className="text-lg">Preview Order</strong>
+        </p>
+        <form className="flex flex-col w-full" onSubmit={placeOrderHandler}>
+          <div className="placeOrderCont">
+            <div className="placeOrderHeader">
+              <strong>Shipping</strong>
             </div>
-
-            <div className="placeOrderCont">
-              <div className="placeOrderHeader">
-                <strong>Payment Method</strong>
-              </div>
-              <div>
-                <strong>Method:</strong> {cart.paymentMethod}
-              </div>
-              <Link className="text-blue-400 underline" to="/payment">
-                Edit
-              </Link>
+            <div>
+              <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
+              <strong>Address: </strong> {cart.shippingAddress.address},
+              {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
+              {cart.shippingAddress.country}
             </div>
+            <Link className="text-blue-400 underline" to="/shipping">
+              Edit
+            </Link>
+          </div>
 
-            <div className="placeOrderCont">
-              <div className="placeOrderHeader">
-                <strong>Items</strong>
-              </div>
-              <div className="placeOrderItems">
-                {cart.cartItems.map((item) => (
-                  <div className="wholeOrderItem" key={item.id}>
-                    <div className="orderItemPart">
-                      <Link
-                        className="text-blue-400 underline"
-                        to={`/${item._id}`}
-                      >
-                        <div className="p-2">
-                          <img
-                            className="w-16 h-12 object-cover"
-                            src={item.image}
-                            alt={item.name}
-                          ></img>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className="orderItemPart">
-                      <Link
-                        className="text-blue-400 underline"
-                        to={`/${item._id}`}
-                      >
-                        {item.name}
-                      </Link>
-                    </div>
-                    <div className="orderItemPart" key={item.id}>
-                      <div className="orderItemQuan">
-                        <span>{item.quantity}</span>
+          <div className="placeOrderCont">
+            <div className="placeOrderHeader">
+              <strong>Payment Method</strong>
+            </div>
+            <div>
+              <strong>Method:</strong> {cart.paymentMethod}
+            </div>
+            <Link className="text-blue-400 underline" to="/payment">
+              Edit
+            </Link>
+          </div>
+
+          <div className="placeOrderCont">
+            <div className="placeOrderHeader">
+              <strong>Items</strong>
+            </div>
+            <div className="placeOrderItems">
+              {cart.cartItems.map((item) => (
+                <div className="wholeOrderItem" key={item.id}>
+                  <div className="orderItemPart">
+                    <Link
+                      className="text-blue-400 underline"
+                      to={`/${item._id}`}
+                    >
+                      <div className="p-2">
+                        <img
+                          className="w-16 h-12 object-cover"
+                          src={item.image}
+                          alt={item.name}
+                        ></img>
                       </div>
-                    </div>
-                    <div className="orderItemPart">{item.price} EGP</div>
+                    </Link>
                   </div>
-                ))}
-              </div>
-              <Link className="text-blue-400 underline" to="/cart">
-                Edit
-              </Link>
-            </div>
-            <div className="placeOrderCont">
-              <div className="placeOrderHeader">
-                <strong>Order Summary</strong>
-              </div>
-              <div className="h3Padding">
-                <strong>Items price</strong>
-                <p>{cart.itemsPrice.toFixed(2)} EGP</p>
-                <strong>Shipping</strong>
-                <p>{cart.shippingPrice.toFixed(2)} EGP</p>
-                <strong>Tax</strong>
-                <p>{cart.taxPrice.toFixed(2)} EGP</p>
-                <div className="placeOrderHeader">
-                  <strong> Order Total</strong>
+                  <div className="orderItemPart">
+                    <Link
+                      className="text-blue-400 underline"
+                      to={`/${item._id}`}
+                    >
+                      {item.name}
+                    </Link>
+                  </div>
+                  <div className="orderItemPart" key={item.id}>
+                    <div className="orderItemQuan">
+                      <span>{item.quantity}</span>
+                    </div>
+                  </div>
+                  <div className="orderItemPart">{item.price} EGP</div>
                 </div>
-                <strong>{cart.totalPrice.toFixed(2)} EGP</strong>
-              </div>
+              ))}
             </div>
-            <div className="flex flex-col py-4">
+            <Link className="text-blue-400 underline" to="/cart">
+              Edit
+            </Link>
+          </div>
+          <div className="placeOrderCont">
+            <div className="placeOrderHeader">
+              <strong>Order Summary</strong>
+            </div>
+            <div className="h3Padding">
+              <strong>Items price</strong>
+              <p>{cart.itemsPrice.toFixed(2)} EGP</p>
+              <strong>Shipping</strong>
+              <p>{cart.shippingPrice.toFixed(2)} EGP</p>
+              <strong>Tax</strong>
+              <p>{cart.taxPrice.toFixed(2)} EGP</p>
+              <div className="placeOrderHeader">
+                <strong> Order Total</strong>
+              </div>
+              <strong>{cart.totalPrice.toFixed(2)} EGP</strong>
+            </div>
+          </div>
+          <div className="mt-4 flex flex-col">
+            {loading ? (
+              <button
+                className="bg-slate-300 text-white py-2 px-6 rounded flex justify-center items-center"
+                type="submit"
+              >
+                <CircularProgress size={25} thickness={4} color="inherit" />
+              </button>
+            ) : (
               <button
                 className="bg-teal-500 text-white py-2 px-6 rounded"
                 type="submit"
               >
                 Place Order
               </button>
-            </div>
-          </form>
-        </div>
-      )}
+            )}
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

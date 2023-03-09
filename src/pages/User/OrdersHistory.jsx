@@ -39,7 +39,7 @@ export default function OrdersHistory() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
-          "https://ecomm-i8yz.onrender.com/orders/mine",
+          "https://ecomm12.herokuapp.com/orders/mine",
 
           { headers: { Authorization: `Bearer ${userInfo.token}` } }
         );
@@ -71,8 +71,8 @@ export default function OrdersHistory() {
   }));
 
   return (
-    <div className="flex flex-col lg:items-center p-4 min-h-screen">
-      <strong className="text-lg mt-2 mb-4">Orders history</strong>
+    <div className="flex flex-col lg:items-center p-4 lg:p-0 min-h-screen">
+      <p className="text-3xl font-semibold lg:my-10 mb-4">Orders History</p>
       {loading ? (
         <LinearProgress />
       ) : error ? (

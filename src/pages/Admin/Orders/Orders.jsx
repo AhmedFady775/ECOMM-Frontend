@@ -39,7 +39,7 @@ export default function Orders() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
-          "https://ecomm-i8yz.onrender.com/orders",
+          "https://ecomm12.herokuapp.com/orders",
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

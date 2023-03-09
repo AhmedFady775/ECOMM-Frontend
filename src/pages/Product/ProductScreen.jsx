@@ -18,7 +18,7 @@ function ProductScreen() {
     queryKey: ["repoData", { id }],
     queryFn: () =>
       axios
-        .get(`https://ecomm-i8yz.onrender.com/products/${id}`)
+        .get(`https://ecomm12.herokuapp.com/products/${id}`)
         .then((res) => res.data),
   });
 
@@ -41,7 +41,7 @@ function ProductScreen() {
   //     dispatch({ type: "FETCH_REQUEST" });
   //     try {
   //       const result = await axios.get(
-  //         `https://ecomm-i8yz.onrender.com/products/${id}`
+  //         `https://ecomm12.herokuapp.com/products/${id}`
   //       );
   //       dispatch({ type: "FETCH_SUCCESS", payload: result.data });
   //     } catch (err) {

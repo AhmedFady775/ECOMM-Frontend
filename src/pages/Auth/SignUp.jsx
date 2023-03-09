@@ -50,7 +50,7 @@ export default function SignUp() {
       dispatch({ type: "LOGIN_REQUEST" });
 
       const { data } = await Axios.post(
-        "https://ecomm-i8yz.onrender.com/auth/register",
+        "https://ecomm12.herokuapp.com/auth/register",
         {
           firstName,
           lastName,
@@ -78,9 +78,9 @@ export default function SignUp() {
   return (
     <div className="flex h-screen items-center justify-center bg-white">
       <div className="flex flex-row items-center space-x-32 w-full justify-center">
-        <form onSubmit={submitHandler} className="w-[70%] md:w-[30%]">
+        <form onSubmit={submitHandler} className="w-[80%] md:w-[30%]">
           <p className="text-5xl font-bold text-gray-400 mb-10">SIGN UP</p>
-          <div className="flex flex-col mb-12">
+          <div className="flex flex-col mb-4">
             <div className="inputCont">
               <label className="inputlabel">First Name</label>
               <input
@@ -147,7 +147,7 @@ export default function SignUp() {
               </button>
             )}
           </div>
-          <div className="flex mt-10">
+          <div className="flex mt-2">
             Already have an account?
             <Link
               className="text-sky-500 ml-2"
