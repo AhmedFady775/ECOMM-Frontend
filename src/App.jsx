@@ -30,6 +30,7 @@ import Products from "./pages/Admin/Products/Products";
 import Orders from "./pages/Admin/Orders/Orders";
 import CreateProduct from "./pages/Admin/Products/CreateProduct";
 import AdminRoute from "./components/AdminRoute";
+import Navbar from "./components/navbar";
 
 const App = () => {
   const location = useLocation();
@@ -112,7 +113,7 @@ const App = () => {
     return (
       <div>
         <Suspense fallback={<LinearProgress />}>
-          <ShopNav />
+          <Navbar />
           <Routes>
             <Route
               path="/user/returns"

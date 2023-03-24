@@ -5,7 +5,7 @@ function ProductsCard({ product }) {
   return (
     <div className="flex flex-col w-fit bg-white rounded-md">
       <Link className="flex" to={`/products/${product._id}`}>
-        <div className="h-[20vh] sm:h-[35vh]">
+        <div className="h-[20vh] sm:h-full">
           <img
             className="h-full w-full object-contain"
             src={product.image}

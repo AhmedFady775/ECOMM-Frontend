@@ -77,11 +77,14 @@ const Shop = () => {
         .then((res) => res.data),
   });
 
+  let viewportWidth = window.innerWidth;
+  console.log(viewportWidth);
+
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <div className="flex flex-col items-center w-full p-4 min-h-screen">
-      <div className="flex flex-col lg:w-[80%]">
+    <div className="flex flex-col p-4 lg:py-4 lg:px-0 lg:w-max-[1184px] lg:w-[1184px] lg:m-auto min-h-screen">
+      <div className="flex flex-col">
         <section className="border-b-2 border-gray-100 pb-4">
           <Link to="/">Home</Link> <KeyboardArrowRight /> <strong>Shop</strong>
         </section>

@@ -52,8 +52,8 @@ function ProductScreen() {
   // }, [id]);
 
   return (
-    <div className="flex flex-col lg:items-center">
-      <div className="flex flex-col lg:w-[80%] p-4 min-h-screen">
+    <div className="flex flex-col lg:w-max-[1184px] lg:w-[1184px] lg:m-auto min-h-screen">
+      <div className="flex flex-col p-4 lg:py-4 lg:px-0 min-h-screen">
         <section className="border-b-2 border-gray-100 pb-4">
           <Link to="/">Home</Link> <KeyboardArrowRight />
           <Link to="/shop">Shop</Link> <KeyboardArrowRight />
@@ -77,12 +77,12 @@ function ProductScreen() {
               <strong className="text-xl pt-2 pb-6">{data.price} EGP</strong>
               <p className="flex py-2 text-xl font-medium">Descreption</p>
               <p className="text-justify">{data.descreption}</p>
-              <p className="flex py-2 text-xl font-medium">Quantity</p>
+              {/* <p className="flex py-2 text-xl font-medium">Quantity</p>
               <div className="flex flex-row text-center p-4 bg-slate-100 w-fit rounded">
                 <RemoveIcon className="rounded mr-4 p-1 bg-teal-500 text-white" />
                 {data.countInStock}
                 <AddIcon className="rounded ml-4 p-1 bg-teal-500 text-white" />
-              </div>
+              </div> */}
 
               <div className="hidden lg:flex flex-row bottom-0 py-4 bg-white space-x-4">
                 <button
@@ -92,7 +92,7 @@ function ProductScreen() {
                   Add to cart
                 </button>
                 <button className="border-2 border-teal-500 text-teal-500 text-lg rounded py-2 w-full">
-                  Add to wishlist
+                  Buy now
                 </button>
               </div>
             </div>

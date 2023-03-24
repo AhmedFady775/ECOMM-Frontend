@@ -7,5 +7,13 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  corePlugins: {
+    aspectRatio: false,
+  },
+  plugins:
+    [
+      require("tailwind-scrollbar-hide"),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/aspect-ratio'),
+    ],
 }
