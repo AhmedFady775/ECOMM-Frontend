@@ -27,6 +27,16 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
+import { AiFillCreditCard } from "react-icons/ai";
+import { MdAssignmentInd } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
+import { RiArrowDownSLine } from "react-icons/ri";
+import { RxPerson } from "react-icons/rx";
+import { BsBox } from "react-icons/bs";
+import { BsCart3 } from "react-icons/bs";
+import { FiSearch } from "react-icons/fi";
+import { BsTelephone } from "react-icons/bs";
+
 function Navbar() {
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -55,9 +65,9 @@ function Navbar() {
   };
 
   const CATEGORIES = [
-    { link: "/cameras", name: "Cameras" },
-    { link: "/wires", name: "Wires" },
-    { link: "/devices", name: "Devices" },
+    { link: "/shop", name: "Cameras" },
+    { link: "/shop", name: "Wires" },
+    { link: "/shop", name: "Devices" },
   ];
 
   const list = () => (
@@ -67,7 +77,7 @@ function Navbar() {
           onClick={toggleDrawer(false)}
           className="absolute right-2 top-2 bg-gray-200 rounded-full flex items-center p-1"
         >
-          <CloseIcon sx={{ fontSize: 20 }} />
+          <IoMdClose sx={{ fontSize: 20 }} />
         </div>
         <ul className="flex flex-col text-black text-sm mt-10">
           <li className="nav-item flex flex-row justify-between text-gray-400 border-b-8 border-gray-100">
@@ -77,12 +87,12 @@ function Navbar() {
             <div>
               <Accordion elevation={0}>
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
+                  expandIcon={<RiArrowDownSLine size={22} />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
                   <div className="flex flex-row items-center">
-                    <PersonIcon sx={{ fontSize: 30 }} />
+                    <RxPerson size={22} />
                     <span className="ml-4">Hello, {userInfo.firstName}</span>
                   </div>
                 </AccordionSummary>
@@ -150,26 +160,26 @@ function Navbar() {
             </li>
           )}
 
-          <li className="nav-item border-t-2 border-b-8 border-gray-100">
-            <Link onClick={toggleDrawer(false)} to="/signin">
-              <span className="mr-6">
-                <InventoryIcon />
+          <Link onClick={toggleDrawer(false)} to="/signin">
+            <li className="nav-item border-t-2 border-b-8 border-gray-100">
+              <span className="mr-4">
+                <BsBox size={22} />
               </span>
               Track your order
-            </Link>
-          </li>
+            </li>
+          </Link>
 
           {CATEGORIES.map((category) => (
-            <li className="nav-item border-b-2 border-gray-100">
-              <Link onClick={toggleDrawer(false)} to={category.link}>
+            <Link onClick={toggleDrawer(false)} to={category.link}>
+              <li className="nav-item border-b-2 border-gray-100">
                 {category.name}
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))}
 
           <li className="nav-item border-b-8 border-t-[6px] border-gray-100">
             <span className="mr-6">
-              <LocalPhoneIcon />
+              <BsTelephone size={22} />
             </span>
             Call *****
           </li>
@@ -215,7 +225,7 @@ function Navbar() {
               placeholder="Search"
               className="flex p-[6px] lg:p-[12px] w-full bg-[#f4f5f6] rounded"
             />
-            <SearchIcon className="absolute right-4" />
+            <FiSearch size={20} className="absolute right-4" />
           </div>
           <div className="flex flex-row items-center lg:gap-8">
             {userInfo ? (
@@ -226,7 +236,7 @@ function Navbar() {
                       onClick={handleClick}
                       className="hidden lg:flex flex-row items-center gap-2 text-sm"
                     >
-                      <PersonOutlineOutlinedIcon sx={{ fontSize: 30 }} />
+                      <RxPerson size={25} />
                       <span className="hidden lg:flex">
                         Hello, {userInfo.firstName}
                       </span>
@@ -342,7 +352,7 @@ function Navbar() {
               className="flex flex-row items-center gap-2 text-sm ml-4 lg:ml-0"
               to="/cart"
             >
-              <ShoppingCartOutlinedIcon />
+              <BsCart3 size={25} />
               <span className="hidden lg:flex">Cart</span>
             </Link>
           </div>

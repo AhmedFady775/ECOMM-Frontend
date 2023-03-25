@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function ProductsCard({ product }) {
+function ProductsCardGrid({ product }) {
   return (
     <Link
       className="flex flex-col px-6 py-5 bg-white hover:shadow-2xl transition-all"
@@ -25,4 +25,4 @@ function ProductsCard({ product }) {
   );
 }
 
-export default ProductsCard;
+export default ProductsCardGrid;

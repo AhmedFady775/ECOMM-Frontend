@@ -1,5 +1,6 @@
 import { useState } from "react";
-import ProductsCard from "./Product/ProductCard";
+import ProductsCardGrid from "./Product/ProductCardGrid";
+import ProductsCardFlex from "./Product/ProductCardFlex";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import Pagination from "@mui/material/Pagination";
@@ -12,6 +13,13 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
+import TuneIcon from "@mui/icons-material/Tune";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+
+import { CiSliderHorizontal } from "react-icons/ci";
+import { BsSortAlphaDown } from "react-icons/bs";
+import { RxDashboard } from "react-icons/rx";
+import { FaGripLines } from "react-icons/fa";
 
 const Shop = () => {
   const [openCategory, setOpenCategory] = useState(true);
@@ -22,6 +30,11 @@ const Shop = () => {
   const [openPrice, setOpenPrice] = useState(true);
   const handlopenPrice = () => {
     setOpenPrice(!openPrice);
+  };
+
+  const [grid, setgrid] = useState(true);
+  const handleGrid = () => {
+    setgrid(!grid);
   };
 
   const CATEGORY = () => (
@@ -36,6 +49,24 @@ const Shop = () => {
       <FormControlLabel control={<Checkbox />} label="Label" />
       <FormControlLabel control={<Checkbox />} label="Label" />
     </FormGroup>
+  );
+
+  const filtermob = () => (
+    <ul className="flex text-xs h-10 items-center font-semibold flex-row border-b border-gray-200">
+      <li className="flex h-full justify-center items-center w-[40%] border-r border-gray-200">
+        <CiSliderHorizontal size={15} className="mr-2" /> Filter by
+      </li>
+      <li className="flex h-full justify-center items-center w-[40%] border-r border-gray-200">
+        <BsSortAlphaDown size={15} className="mr-2" />
+        Sort
+      </li>
+      <li
+        onClick={handleGrid}
+        className="flex h-full justify-center items-center w-[20%]"
+      >
+        {grid ? <FaGripLines size={15} /> : <RxDashboard size={15} />}
+      </li>
+    </ul>
   );
 
   const filter = () => (
@@ -149,8 +180,10 @@ const Shop = () => {
             {filter()}
           </Drawer>
         </section> */}
-        <section className="flex flex-col lg:flex-row px-4 lg:px-0">
-          <section className="flex flex-col lg:w-1/4">{filter()} </section>
+        <section className="flex flex-col lg:flex-row lg:px-0">
+          <section className="hidden lg:flex flex-col lg:w-1/4">
+            {filter()}{" "}
+          </section>
           <div className="flex flex-col lg:w-3/4">
             <div className="flex flex-col shadow">
               <section className="flex flex-col  rounded">
@@ -161,7 +194,8 @@ const Shop = () => {
                     {console.log(allData?.count)} */}
                   </span>
                 </div>
-                <p className="flex py-[26px] px-[24px] border-b border-gray-200">
+                {filtermob()}
+                <p className="hidden lg:flex py-[26px] px-[24px] border-b border-gray-200">
                   Sort by:
                 </p>
               </section>
@@ -213,14 +247,18 @@ const Shop = () => {
                     />
                   </div>
                 </div>
+              ) : grid ? (
+                <section className="grid grid-cols-2 lg:grid-cols-3 bg-gray-200 gap-[1px]">
+                  {data.products?.map((data) => (
+                    <ProductsCardGrid product={data} key={data.id} />
+                  ))}
+                </section>
               ) : (
-                <div>
-                  <section className="grid grid-cols-2 lg:grid-cols-3 bg-gray-300 gap-[1px]">
-                    {data.products?.map((data) => (
-                      <ProductsCard product={data} key={data.id} />
-                    ))}
-                  </section>
-                </div>
+                <section className="flex flex-col bg-gray-200 gap-[1px]">
+                  {data.products?.map((data) => (
+                    <ProductsCardFlex product={data} key={data.id} />
+                  ))}
+                </section>
               )}
             </div>
             <section className="flex justify-center my-4">
