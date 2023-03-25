@@ -20,6 +20,7 @@ import { CiSliderHorizontal } from "react-icons/ci";
 import { BsSortAlphaDown } from "react-icons/bs";
 import { RxDashboard } from "react-icons/rx";
 import { FaGripLines } from "react-icons/fa";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Shop = () => {
   const [openCategory, setOpenCategory] = useState(true);
@@ -64,7 +65,7 @@ const Shop = () => {
         onClick={handleGrid}
         className="flex h-full justify-center items-center w-[20%]"
       >
-        {grid ? <FaGripLines size={15} /> : <RxDashboard size={15} />}
+        {grid ? <RxHamburgerMenu size={15} /> : <RxDashboard size={15} />}
       </li>
     </ul>
   );
