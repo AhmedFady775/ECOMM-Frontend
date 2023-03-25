@@ -1,41 +1,76 @@
 import { useState } from "react";
 import ProductsCard from "./Product/ProductCard";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import TuneIcon from "@mui/icons-material/Tune";
 import { Link } from "react-router-dom";
-import { Drawer } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import LinearProgress from "@mui/joy/LinearProgress";
 import Skeleton from "@mui/material/Skeleton";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import RemoveIcon from "@mui/icons-material/Remove";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import Checkbox from "@mui/material/Checkbox";
 
 const Shop = () => {
+  const [openCategory, setOpenCategory] = useState(true);
+  const handleopenCategory = () => {
+    setOpenCategory(!openCategory);
+  };
+
+  const [openPrice, setOpenPrice] = useState(true);
+  const handlopenPrice = () => {
+    setOpenPrice(!openPrice);
+  };
+
+  const CATEGORY = () => (
+    <FormGroup className="my-4">
+      <FormControlLabel control={<Checkbox />} label="Label" />
+      <FormControlLabel control={<Checkbox />} label="Label" />
+    </FormGroup>
+  );
+
+  const PRICE = () => (
+    <FormGroup className="my-4">
+      <FormControlLabel control={<Checkbox />} label="Label" />
+      <FormControlLabel control={<Checkbox />} label="Label" />
+    </FormGroup>
+  );
+
   const filter = () => (
-    <div className="h-screen">
-      <section className="flex-col flex px-6 py-10 text-black space-y-6  text-xl font-medium">
-        <ul className="flex flex-col text-black space-y-8">
-          <li className="flex felx-row justify-between">
-            <span>
-              <AddIcon className="mr-4" sx={{ fontSize: 20 }} />
-              Sort
-            </span>
-            <CloseIcon onClick={toggleDrawer(false)} sx={{ fontSize: 30 }} />
-          </li>
-          <li className="flex felx-row items-center">
-            <AddIcon className="mr-4" sx={{ fontSize: 20 }} />
-            Category{" "}
-          </li>
-          <li className="flex felx-row items-center">
-            <AddIcon className="mr-4" sx={{ fontSize: 20 }} />
-            Price{" "}
-          </li>
-        </ul>
-      </section>
-    </div>
+    <ul className="flex flex-col text-black mr-6">
+      <li className="flex flex-col py-4 cursor-pointer">
+        <div
+          onClick={handleopenCategory}
+          className="flex flex-row justify-between w-full"
+        >
+          Brand
+          {openCategory ? (
+            <RemoveIcon sx={{ fontSize: 20 }} />
+          ) : (
+            <AddIcon sx={{ fontSize: 20 }} />
+          )}
+        </div>
+
+        {openCategory ? CATEGORY() : null}
+      </li>
+
+      <li className="flex flex-col py-4 cursor-pointer">
+        <div
+          onClick={handlopenPrice}
+          className="flex flex-row justify-between w-full"
+        >
+          Price
+          {openPrice ? (
+            <RemoveIcon sx={{ fontSize: 20 }} />
+          ) : (
+            <AddIcon sx={{ fontSize: 20 }} />
+          )}
+        </div>
+        {openPrice ? PRICE() : null}
+      </li>
+    </ul>
   );
 
   // const [{ loading, error, product }, dispatch] = useReducer(reducer, {
@@ -47,11 +82,6 @@ const Shop = () => {
   const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
     setPage(value);
-  };
-
-  const [open, setOpen] = useState(false);
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
   };
 
   // useEffect(() => {
@@ -77,18 +107,38 @@ const Shop = () => {
         .then((res) => res.data),
   });
 
-  let viewportWidth = window.innerWidth;
-  console.log(viewportWidth);
+  // const { allData } = useQuery({
+  //   queryKey: ["repoData", { page }],
+  //   queryFn: () =>
+  //     axios
+  //       .get("https://ecomm12.herokuapp.com/products/allproducts")
+  //       .then((res) => res.allData),
+  // });
 
   if (error) return "An error has occurred: " + error.message;
 
+  const breadcrumbs = [
+    <Link key="1" color="inherit" to="/">
+      Home
+    </Link>,
+    <strong key="2" color="text.primary">
+      Cameras
+    </strong>,
+  ];
+
   return (
-    <div className="flex flex-col p-4 lg:py-4 lg:px-0 lg:w-max-[1184px] lg:w-[1184px] lg:m-auto min-h-screen">
-      <div className="flex flex-col">
-        <section className="border-b-2 border-gray-100 pb-4">
-          <Link to="/">Home</Link> <KeyboardArrowRight /> <strong>Shop</strong>
-        </section>
-        <section className="border-b-2 border-gray-100 py-4">
+    <div className="flex flex-col  lg:py-0 lg:px-0 lg:w-max-[1184px] lg:w-[1184px] lg:m-auto min-h-screen">
+      <div className="flex flex-col ">
+        <Breadcrumbs
+          py={1}
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+          fontSize="small"
+          className="p-2 lg:p-0 bg-gray-100 lg:bg-white"
+        >
+          {breadcrumbs}
+        </Breadcrumbs>
+        {/* <section className="border-b-2 border-gray-100 py-4">
           <button
             onClick={toggleDrawer(true)}
             className="flex flex-row px-4 py-2 text-white bg-teal-500 rounded"
@@ -98,90 +148,92 @@ const Shop = () => {
           <Drawer open={open} anchor="bottom" onClose={toggleDrawer(false)}>
             {filter()}
           </Drawer>
-        </section>
-        {isLoading ? (
-          <div className="min-h-screen p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <div className="flex flex-col gap-2">
-              <Skeleton height={300} variant="rectangle" />
-              <Skeleton
-                height={10}
-                width={200}
-                sx={{ borderRadius: "4px" }}
-                variant="rectangle"
-              />
-              <Skeleton
-                height={10}
-                sx={{ borderRadius: "4px" }}
-                width={100}
-                variant="rectangle"
-              />
+        </section> */}
+        <section className="flex flex-col lg:flex-row px-4 lg:px-0">
+          <section className="flex flex-col lg:w-1/4">{filter()} </section>
+          <div className="flex flex-col lg:w-3/4">
+            <div className="flex flex-col shadow">
+              <section className="flex flex-col  rounded">
+                <div className="flex items-center py-[26px] px-[24px] border-b border-gray-200">
+                  Cameras
+                  <span className="ml-2 flex text-sm rounded-full items-center py-1 px-3 bg-slate-100">
+                    {/* {allData?.count}
+                    {console.log(allData?.count)} */}
+                  </span>
+                </div>
+                <p className="flex py-[26px] px-[24px] border-b border-gray-200">
+                  Sort by:
+                </p>
+              </section>
+              {isLoading ? (
+                <div className="min-h-screen grid grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                  <div className="flex flex-col gap-2">
+                    <Skeleton height={300} variant="rectangle" />
+                    <Skeleton
+                      height={10}
+                      width={200}
+                      sx={{ borderRadius: "4px" }}
+                      variant="rectangle"
+                    />
+                    <Skeleton
+                      height={10}
+                      sx={{ borderRadius: "4px" }}
+                      width={100}
+                      variant="rectangle"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Skeleton height={300} variant="rectangle" />
+                    <Skeleton
+                      height={10}
+                      width={200}
+                      sx={{ borderRadius: "4px" }}
+                      variant="rectangle"
+                    />
+                    <Skeleton
+                      height={10}
+                      sx={{ borderRadius: "4px" }}
+                      width={100}
+                      variant="rectangle"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Skeleton height={300} variant="rectangle" />
+                    <Skeleton
+                      height={10}
+                      width={200}
+                      sx={{ borderRadius: "4px" }}
+                      variant="rectangle"
+                    />
+                    <Skeleton
+                      height={10}
+                      sx={{ borderRadius: "4px" }}
+                      width={100}
+                      variant="rectangle"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <section className="grid grid-cols-2 lg:grid-cols-3 bg-gray-300 gap-[1px]">
+                    {data.products?.map((data) => (
+                      <ProductsCard product={data} key={data.id} />
+                    ))}
+                  </section>
+                </div>
+              )}
             </div>
-            <div className="flex flex-col gap-2">
-              <Skeleton height={300} variant="rectangle" />
-              <Skeleton
-                height={10}
-                width={200}
-                sx={{ borderRadius: "4px" }}
-                variant="rectangle"
+            <section className="flex justify-center my-4">
+              <Pagination
+                shape="rounded"
+                size="large"
+                count={data?.count}
+                page={page}
+                onChange={handleChange}
+                onClick={() => window.scrollTo(0, 0)}
               />
-              <Skeleton
-                height={10}
-                sx={{ borderRadius: "4px" }}
-                width={100}
-                variant="rectangle"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Skeleton height={300} variant="rectangle" />
-              <Skeleton
-                height={10}
-                width={200}
-                sx={{ borderRadius: "4px" }}
-                variant="rectangle"
-              />
-              <Skeleton
-                height={10}
-                sx={{ borderRadius: "4px" }}
-                width={100}
-                variant="rectangle"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Skeleton height={300} variant="rectangle" />
-              <Skeleton
-                height={10}
-                width={200}
-                sx={{ borderRadius: "4px" }}
-                variant="rectangle"
-              />
-              <Skeleton
-                height={10}
-                sx={{ borderRadius: "4px" }}
-                width={100}
-                variant="rectangle"
-              />
-            </div>
+            </section>
           </div>
-        ) : (
-          <section className="flex py-4">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {data.products?.map((data) => (
-                <ProductsCard product={data} key={data.id} />
-              ))}
-            </div>
-          </section>
-        )}
-        <section className="flex justify-center">
-          <Stack spacing={2}>
-            <Pagination
-              shape="rounded"
-              size="large"
-              count={data?.count}
-              page={page}
-              onChange={handleChange}
-              onClick={() => window.scrollTo(0, 0)}
-            />
-          </Stack>
         </section>
       </div>
     </div>
