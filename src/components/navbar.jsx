@@ -331,7 +331,7 @@ function Navbar() {
               </div>
             ) : (
               <Link
-                className="flex flex-row items-center gap-2 text-sm"
+                className="hidden lg:flex flex-row items-center gap-2 text-sm"
                 to="/signin"
               >
                 <PersonOutlineOutlinedIcon />
