@@ -1,18 +1,24 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Footer from "./components/footer";
+import { startTransition } from "react";
 import { lazy, Suspense, useEffect } from "react";
-import Home from "./pages/Home";
+const Home = lazy(() => import("./pages/Home"));
 import LinearProgress from "@mui/material/LinearProgress";
-import SignIn from "./pages/Auth/SignIn";
-import SignUp from "../src/pages/Auth/SignUp";
+const SignIn = lazy(() => import("./pages/Auth/SignIn"));
+const SignUp = lazy(() => import("./pages/Auth/SignUp"));
+
 import ProductScreen from "./pages/Product/ProductScreen";
 import * as React from "react";
 // import Shop from "./pages/Shop";
 const Shop = lazy(() => import("./pages/Shop"));
-import Cart from "./pages/Cart";
+const Cart = lazy(() => import("./pages/Cart"));
+const ShippingAddressScreen = lazy(() =>
+  import("./pages/Shipping/ShippingAddressScreen")
+);
+
+const Checkout = lazy(() => import("./pages/Checkout/Checkout"));
+import Footer from "./components/footer";
 import ShopNav from "./components/ShopNav";
-import ShippingAddressScreen from "./pages/Shipping/ShippingAddressScreen";
 import OrderScreen from "./pages/Shipping/OrderScreen";
 import PaymentMethodScreen from "./pages/Shipping/PaymentMethodScreen";
 import PlaceOrderScreen from "./pages/Shipping/PlaceOrderScreen";
@@ -121,6 +127,7 @@ const App = () => {
 
   if (
     location.pathname !== "/signin" &&
+    location.pathname !== "/checkout" &&
     location.pathname !== "/" &&
     location.pathname !== "/signup" &&
     location.pathname !== "/admin/dashboard" &&
@@ -131,7 +138,7 @@ const App = () => {
   ) {
     return (
       <div>
-        <Suspense fallback={<LinearProgress />}>
+        <Suspense fallback={<LinearProgress />} fallbackMinDurationMs={1500}>
           <Navbar />
           <Routes>
             <Route
@@ -191,11 +198,14 @@ const App = () => {
 
   return (
     <div>
-      <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <Suspense fallback={<LinearProgress />}>
+        <Routes>
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Suspense>
       <ToastContainer position="bottom-center" limit={1} autoClose={2000} />
     </div>
   );

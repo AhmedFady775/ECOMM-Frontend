@@ -123,7 +123,7 @@ const Shop = () => {
       <li className="flex flex-col py-4 cursor-pointer">
         <div
           onClick={handleopenCategory}
-          className="flex flex-row justify-between w-full"
+          className="flex flex-row justify-between w-full text-base font-semibold leading-6 tracking-[0]"
         >
           Brand
           {openCategory ? (
@@ -139,7 +139,7 @@ const Shop = () => {
       <li className="flex flex-col py-4 cursor-pointer">
         <div
           onClick={handlopenPrice}
-          className="flex flex-row justify-between w-full"
+          className="flex flex-row justify-between w-full text-base font-semibold leading-6 tracking-[0]"
         >
           Price
           {openPrice ? (
@@ -183,7 +183,7 @@ const Shop = () => {
           <div className="flex flex-col lg:w-3/4">
             <div className="flex flex-col shadow">
               <section className="flex flex-col  rounded">
-                <div className="flex items-center py-[26px] px-[24px] border-b border-gray-200">
+                <div className="flex items-center py-[26px] px-[24px] border-b text-[1.15rem] font-semibold leading-6 tracking-[-1px] border-gray-200">
                   Cameras
                   <span className="ml-2 flex text-sm rounded-full items-center py-1 px-3 bg-slate-100">
                     {allProducts?.count}
@@ -192,7 +192,7 @@ const Shop = () => {
                 <section className="lg:hidden flex flex-col">
                   {filtermob()}
                 </section>
-                <p className="hidden lg:flex py-[26px] px-[24px] border-b border-gray-200">
+                <p className="hidden lg:flex py-[26px] px-[24px] border-b text-sm font-semibold leading-5 tracking-[0] border-gray-200">
                   Sort by:
                 </p>
               </section>

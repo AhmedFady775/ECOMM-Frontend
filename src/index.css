@@ -1,6 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +7,11 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family: "IBM Plex Sans Arabic";
+}
+
+.fontTech {
+  font-family: "IBM Plex Sans Arabic";
 }
 
 .Robot {
@@ -59,51 +62,8 @@ body {
   @apply flex justify-center items-center w-full bg-white min-h-[400px];
 }
 
-.dropDown {
-  @apply flex p-2 hover:bg-slate-300 w-full font-semibold;
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: row;
-  padding: 12px 16px;
-}
-
-.nav-item .active {
-  color: rgb(20 184 166);
-}
-
-.checkout-steps > div {
-  border-bottom: 0.2rem solid #949494;
-  color: #a0a0a0;
-  width: 100%;
-}
-.checkout-steps > div.active {
-  border-bottom: 0.2rem solid #21b69d;
-  color: #21b69d;
-  width: 100%;
-}
-
-.checkout-steps {
-  display: flex;
-  justify-content: center;
-  font-size: 15px;
-  padding: 1rem 0rem;
-  width: 90%;
-}
-
 .placeOrderHeader {
-  @apply my-2 text-slate-500;
-}
-
-.placeOrderCont {
-  display: flex;
-  flex-direction: column;
-  @apply border-b-2 pb-4;
-}
-
-.placeOrderItems {
-  text-decoration: none;
+  @apply mb-2 text-slate-500;
 }
 
 .wholeOrderItem {
@@ -122,105 +82,4 @@ body {
   width: 20%;
   display: flex;
   justify-content: center;
-}
-
-.orderItemPart {
-  text-decoration: none;
-  font-size: 12px;
-}
-
-.placeOrderHeaders {
-  padding-bottom: 1rem;
-  color: #21b69d;
-}
-
-.ImportantOne {
-  margin: 1rem 0rem;
-}
-
-.activated {
-  @apply flex flex-row p-2 text-lg bg-slate-600 rounded;
-}
-
-.notActivated {
-  @apply flex flex-row p-2 text-lg rounded hover:bg-slate-600;
-}
-
-.roadmap {
-  display: flex;
-  padding: 10px 10px;
-}
-
-.milestone {
-  display: flex;
-  flex-direction: row;
-}
-
-.timeline {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-}
-
-.circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #ccc;
-  border: 2px solid #fff;
-}
-
-.line {
-  min-height: 40px;
-  background-color: #ccc;
-  width: 10px;
-}
-
-.selected__line {
-  flex-grow: 1;
-  background-color: #4caf50;
-}
-
-.selected__circle {
-  background-color: #4caf50;
-}
-
-.milestone__shapes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 10px;
-}
-
-.button__name {
-  display: flex;
-  border: 2px solid #ccc;
-  padding: 4px 16px;
-  border-radius: 4px;
-}
-
-.selected__button {
-  display: flex;
-  background: #ccc;
-  padding: 4px 16px;
-  border-radius: 4px;
-}
-
-.button__name:hover {
-  background: #ccc;
-}
-
-.description_cont {
-  margin: 10px 0px;
-  padding: 10px;
-  border-radius: 4px;
-  border: 2px solid #ccc;
-  min-width: 200px;
-  max-width: 600px;
-  text-align: justify;
-}
-
-.description {
-  margin-bottom: 20px;
 }

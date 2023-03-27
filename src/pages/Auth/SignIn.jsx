@@ -73,7 +73,7 @@ export default function SignIn() {
         <div className="flex my-4 items-center">
           <img src={mobileLogin} className="w-[200px]" />
         </div>
-        <p className="text-[#0e001a] mb-2 text-[1.3rem] font-semibold leading-[1.8rem] ">
+        <p className="text-[#0e001a] mb-4 text-[1.3rem] font-semibold leading-[1.8rem] ">
           Welcome back!
         </p>
         <form onSubmit={submitHandler} className="flex flex-col w-full">

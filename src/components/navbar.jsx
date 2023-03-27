@@ -94,7 +94,7 @@ function Navbar() {
                   <Link to="/user/profile">
                     <MenuItem sx={{ py: 1.5 }}>
                       <ListItemIcon>
-                        <PersonIcon fontSize="small" />
+                        <RxPerson size={22} />
                       </ListItemIcon>
                       Profile
                     </MenuItem>
@@ -230,8 +230,8 @@ function Navbar() {
                     className="hidden lg:flex flex-row items-center gap-2 text-sm"
                   >
                     <RxPerson size={25} />
-                    <span className="hidden lg:flex">
-                      Hello, {userInfo.firstName}
+                    <span className="hidden lg:flex text-sm font-normal leading-5 tracking-[0]">
+                      Hello, {userInfo.firstName}.
                     </span>
                   </div>
                   <Menu
@@ -333,10 +333,10 @@ function Navbar() {
               </div>
             ) : (
               <Link
-                className="hidden lg:flex flex-row items-center gap-2 text-sm"
+                className="hidden lg:flex flex-row items-center gap-2 text-sm font-normal leading-5 tracking-[0]"
                 to="/signin"
               >
-                <PersonOutlineOutlinedIcon />
+                <RxPerson size={20} />
                 My account
               </Link>
             )}
@@ -351,9 +351,11 @@ function Navbar() {
                 )}
                 color="error"
               >
-                <BsCart3 size={25} />
+                <BsCart3 size={22} />
               </Badge>
-              <span className="hidden lg:flex">Cart</span>
+              <span className="hidden lg:flex text-sm font-normal leading-5 tracking-[0]">
+                Cart
+              </span>
             </Link>
           </div>
         </section>

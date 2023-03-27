@@ -33,7 +33,7 @@ function Cart() {
   };
 
   const checkoutHandler = () => {
-    navigate("/signin?redirect=/shipping");
+    navigate("/signin?redirect=/checkout");
   };
 
   // const controlItem = (item, quantity) => (
@@ -195,7 +195,7 @@ function Cart() {
               borderRadius: "8px",
               backgroundColor: "#0e001a",
               "&:hover": {
-                backgroundColor: "#0e001ac0",
+                backgroundColor: "#3a3a3a",
               },
             }}
             size="large"
@@ -216,7 +216,7 @@ function Cart() {
             <div className="flex flex-col bg-white py-6 px-4 mb-4 shadow items-center">
               <div className="flex flex-col lg:max-w-[328px]">
                 <div className="flex justify-center">
-                  <img src={CartEmpty} className="h-[160px] w-fit" />
+                  <img src={CartEmpty} className="h-[160px]" />
                 </div>
                 <div className="py-6 text-center">
                   <p className="text-xl text-[#0e001a] font-semibold">
