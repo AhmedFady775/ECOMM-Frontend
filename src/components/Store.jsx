@@ -51,7 +51,9 @@ function reducer(state, action) {
         ...state,
         userInfo: null,
         cart: {
-          cartItems: [],
+          cartItems: localStorage.getItem("cartItems")
+            ? JSON.parse(localStorage.getItem("cartItems"))
+            : [],
           shippingAddress: {},
           paymentMethod: "",
         },
