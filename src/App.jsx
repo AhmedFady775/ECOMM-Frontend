@@ -1,12 +1,13 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/footer";
-import React, { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import Home from "./pages/Home";
-import LinearProgress from "@mui/joy/LinearProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "../src/pages/Auth/SignUp";
 import ProductScreen from "./pages/Product/ProductScreen";
+import * as React from "react";
 // import Shop from "./pages/Shop";
 const Shop = lazy(() => import("./pages/Shop"));
 import Cart from "./pages/Cart";
@@ -34,6 +35,24 @@ import Navbar from "./components/navbar";
 
 const App = () => {
   const location = useLocation();
+
+  const [progress, setProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 100) {
+          return 0;
+        }
+        const diff = Math.random() * 10;
+        return Math.min(oldProgress + diff, 100);
+      });
+    }, 500);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   useEffect(() => {
     if (location.pathname !== "/shop") {

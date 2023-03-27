@@ -1,13 +1,10 @@
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import { Drawer } from "@mui/material";
 import { Store } from "./Store";
-import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -23,9 +20,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import Badge from "@mui/material/Badge";
 
 import { AiFillCreditCard } from "react-icons/ai";
 import { MdAssignmentInd } from "react-icons/md";
@@ -39,7 +34,7 @@ import { BsTelephone } from "react-icons/bs";
 
 function Navbar() {
   const { state } = useContext(Store);
-  const { userInfo } = state;
+  const { cart, userInfo } = state;
   const { dispatch: ctxDispatch } = useContext(Store);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -178,7 +173,7 @@ function Navbar() {
           ))}
 
           <li className="nav-item border-b-8 border-t-[6px] border-gray-100">
-            <span className="mr-6">
+            <span className="mr-4">
               <BsTelephone size={22} />
             </span>
             Call *****
@@ -204,7 +199,7 @@ function Navbar() {
           <li>Call *****</li>
         </ul>
       </nav>
-      <nav className="h-14 lg:h-20 bg-white text-black shadow-md ">
+      <nav className="h-14 lg:h-20 bg-white text-black shadow-sm ">
         <section className="flex flex-row items-center justify-between h-full lg:w-max-[1184px] lg:w-[1184px] lg:m-auto px-3 lg:px-0">
           <span className="flex lg:hidden">
             <MenuIcon onClick={toggleDrawer(true)} fontSize="large" />
@@ -352,7 +347,15 @@ function Navbar() {
               className="flex flex-row items-center gap-2 text-sm ml-4 lg:ml-0"
               to="/cart"
             >
-              <BsCart3 size={25} />
+              <Badge
+                badgeContent={cart.cartItems.reduce(
+                  (a, c) => a + c.quantity,
+                  0
+                )}
+                color="error"
+              >
+                <BsCart3 size={25} />
+              </Badge>
               <span className="hidden lg:flex">Cart</span>
             </Link>
           </div>

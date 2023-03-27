@@ -23,6 +23,36 @@ import { FaGripLines } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 const Shop = () => {
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  const { isLoading, data: products } = useQuery({
+    queryKey: ["repoData", { page }],
+    queryFn: () =>
+      axios
+        .get(`https://ecomm12.herokuapp.com/products?page=${page}`)
+        .then((res) => res.data),
+  });
+
+  const { data: allProducts } = useQuery({
+    queryKey: ["allData"],
+    queryFn: () =>
+      axios
+        .get("https://ecomm12.herokuapp.com/products/allproducts")
+        .then((res) => res.data),
+  });
+
+  const breadcrumbs = [
+    <Link key="1" color="inherit" to="/">
+      Home
+    </Link>,
+    <strong key="2" color="text.primary">
+      Cameras
+    </strong>,
+  ];
+
   const [openCategory, setOpenCategory] = useState(true);
   const handleopenCategory = () => {
     setOpenCategory(!openCategory);
@@ -37,6 +67,24 @@ const Shop = () => {
   const handleGrid = () => {
     setgrid(!grid);
   };
+
+  const SKELETON = (
+    <div className="flex flex-col px-6 py-5 gap-2">
+      <Skeleton height={150} variant="rectangle" />
+      <Skeleton
+        height={10}
+        width={100}
+        sx={{ borderRadius: "4px" }}
+        variant="rectangle"
+      />
+      <Skeleton
+        height={10}
+        width={50}
+        sx={{ borderRadius: "4px" }}
+        variant="rectangle"
+      />
+    </div>
+  );
 
   const CATEGORY = () => (
     <FormGroup className="my-4">
@@ -105,59 +153,6 @@ const Shop = () => {
     </ul>
   );
 
-  // const [{ loading, error, product }, dispatch] = useReducer(reducer, {
-  //   product: [],
-  //   loading: true,
-  //   error: "",
-  // });
-
-  const [page, setPage] = useState(1);
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     dispatch({ type: "FETCH_REQUEST" });
-  //     try {
-  //       const result = await axios.get(
-  //         `https://ecomm12.herokuapp.com/products?page=${page}`
-  //       );
-  //       dispatch({ type: "FETCH_SUCCESS", payload: result.data });
-  //     } catch (err) {
-  //       dispatch({ type: "FETCH_FAIL", payload: err.message });
-  //     }
-  //   };
-  //   fetchData();
-  // }, [page]);
-
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["repoData", { page }],
-    queryFn: () =>
-      axios
-        .get(`https://ecomm12.herokuapp.com/products?page=${page}`)
-        .then((res) => res.data),
-  });
-
-  // const { allData } = useQuery({
-  //   queryKey: ["repoData", { page }],
-  //   queryFn: () =>
-  //     axios
-  //       .get("https://ecomm12.herokuapp.com/products/allproducts")
-  //       .then((res) => res.allData),
-  // });
-
-  if (error) return "An error has occurred: " + error.message;
-
-  const breadcrumbs = [
-    <Link key="1" color="inherit" to="/">
-      Home
-    </Link>,
-    <strong key="2" color="text.primary">
-      Cameras
-    </strong>,
-  ];
-
   return (
     <div className="flex flex-col  lg:py-0 lg:px-0 lg:w-max-[1184px] lg:w-[1184px] lg:m-auto min-h-screen">
       <div className="flex flex-col ">
@@ -183,7 +178,7 @@ const Shop = () => {
         </section> */}
         <section className="flex flex-col lg:flex-row lg:px-0">
           <section className="hidden lg:flex flex-col lg:w-1/4">
-            {filter()}{" "}
+            {filter()}
           </section>
           <div className="flex flex-col lg:w-3/4">
             <div className="flex flex-col shadow">
@@ -191,82 +186,43 @@ const Shop = () => {
                 <div className="flex items-center py-[26px] px-[24px] border-b border-gray-200">
                   Cameras
                   <span className="ml-2 flex text-sm rounded-full items-center py-1 px-3 bg-slate-100">
-                    {/* {allData?.count}
-                    {console.log(allData?.count)} */}
+                    {allProducts?.count}
                   </span>
                 </div>
-                {filtermob()}
+                <section className="lg:hidden flex flex-col">
+                  {filtermob()}
+                </section>
                 <p className="hidden lg:flex py-[26px] px-[24px] border-b border-gray-200">
                   Sort by:
                 </p>
               </section>
               {isLoading ? (
-                <div className="min-h-screen grid grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                  <div className="flex flex-col gap-2">
-                    <Skeleton height={300} variant="rectangle" />
-                    <Skeleton
-                      height={10}
-                      width={200}
-                      sx={{ borderRadius: "4px" }}
-                      variant="rectangle"
-                    />
-                    <Skeleton
-                      height={10}
-                      sx={{ borderRadius: "4px" }}
-                      width={100}
-                      variant="rectangle"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Skeleton height={300} variant="rectangle" />
-                    <Skeleton
-                      height={10}
-                      width={200}
-                      sx={{ borderRadius: "4px" }}
-                      variant="rectangle"
-                    />
-                    <Skeleton
-                      height={10}
-                      sx={{ borderRadius: "4px" }}
-                      width={100}
-                      variant="rectangle"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Skeleton height={300} variant="rectangle" />
-                    <Skeleton
-                      height={10}
-                      width={200}
-                      sx={{ borderRadius: "4px" }}
-                      variant="rectangle"
-                    />
-                    <Skeleton
-                      height={10}
-                      sx={{ borderRadius: "4px" }}
-                      width={100}
-                      variant="rectangle"
-                    />
-                  </div>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
+                  {Array.from({ length: 9 }, () => SKELETON)}
                 </div>
               ) : grid ? (
-                <section className="grid grid-cols-2 lg:grid-cols-3 bg-gray-200 gap-[1px]">
-                  {data.products?.map((data) => (
-                    <ProductsCardGrid product={data} key={data.id} />
-                  ))}
-                </section>
+                <>
+                  <section className="grid grid-cols-2 lg:grid-cols-3 bg-gray-200 gap-[1px]">
+                    {products.products?.map((data) => (
+                      <ProductsCardGrid product={data} key={data.id} />
+                    ))}
+                  </section>
+                </>
               ) : (
-                <section className="flex flex-col bg-gray-200 gap-[1px]">
-                  {data.products?.map((data) => (
-                    <ProductsCardFlex product={data} key={data.id} />
-                  ))}
-                </section>
+                <>
+                  <section className="flex flex-col bg-gray-200 gap-[1px]">
+                    {products.products?.map((data) => (
+                      <ProductsCardFlex product={data} key={data.id} />
+                    ))}
+                  </section>
+                </>
               )}
             </div>
             <section className="flex justify-center my-4">
               <Pagination
                 shape="rounded"
                 size="large"
-                count={data?.count}
+                count={products?.count}
                 page={page}
                 onChange={handleChange}
                 onClick={() => window.scrollTo(0, 0)}
