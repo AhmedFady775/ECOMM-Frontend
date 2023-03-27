@@ -14,7 +14,6 @@ import Logout from "@mui/icons-material/Logout";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
-import Tooltip from "@mui/material/Tooltip";
 import PersonIcon from "@mui/icons-material/Person";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Accordion from "@mui/material/Accordion";
@@ -226,17 +225,15 @@ function Navbar() {
             {userInfo ? (
               <div className="cursor-pointer flex ">
                 <div className="flex flex-row">
-                  <Tooltip arrow title="Profile">
-                    <div
-                      onClick={handleClick}
-                      className="hidden lg:flex flex-row items-center gap-2 text-sm"
-                    >
-                      <RxPerson size={25} />
-                      <span className="hidden lg:flex">
-                        Hello, {userInfo.firstName}
-                      </span>
-                    </div>
-                  </Tooltip>
+                  <div
+                    onClick={handleClick}
+                    className="hidden lg:flex flex-row items-center gap-2 text-sm"
+                  >
+                    <RxPerson size={25} />
+                    <span className="hidden lg:flex">
+                      Hello, {userInfo.firstName}
+                    </span>
+                  </div>
                   <Menu
                     anchorEl={anchorEl}
                     open={openDrop}
