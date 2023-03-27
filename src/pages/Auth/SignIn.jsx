@@ -100,7 +100,7 @@ export default function SignIn() {
               />
             </div>
           </div>
-          <div className="flex flex-col ">
+          <div className="flex flex-col">
             {loading ? (
               <button
                 className="bg-slate-300 text-white  p-4 rounded flex justify-center items-center "

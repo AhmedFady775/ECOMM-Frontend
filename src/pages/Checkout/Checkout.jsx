@@ -343,41 +343,22 @@ function Checkout() {
           </div>
           {paymentMethodFormchecked && submitDeliveryDetailschecked ? (
             loading ? (
-              <div>
-                <div className="flex px-[26px] mt-[18px]">
-                  <Button
-                    onClick={placeOrderHandler}
-                    className="w-full"
-                    variant="contained"
-                    sx={{
-                      padding: "16px",
-                      borderRadius: "8px",
-                      backgroundColor: "#3a3a3a",
-                    }}
-                    size="large"
-                  >
-                    <CircularProgress size={25} thickness={4} color="inherit" />
-                  </Button>
-                </div>
+              <div className="flex flex-col px-[26px] mt-[18px]">
+                <button
+                  className="bg-slate-300 text-white  p-4 rounded flex justify-center items-center "
+                  type="submit"
+                >
+                  <CircularProgress size={25} thickness={4} color="inherit" />
+                </button>
               </div>
             ) : (
-              <div className="flex px-[26px] mt-[18px]">
-                <Button
+              <div className="flex flex-col px-[26px] mt-[18px]">
+                <button
+                  className="bg-[#0e001a] text-white p-4 rounded-lg font-semibold hover:bg-[#0e001ab7] transition"
                   onClick={placeOrderHandler}
-                  className="w-full"
-                  variant="contained"
-                  sx={{
-                    padding: "16px",
-                    borderRadius: "8px",
-                    backgroundColor: "#0e001a",
-                    "&:hover": {
-                      backgroundColor: "#3a3a3a",
-                    },
-                  }}
-                  size="large"
                 >
                   Place order
-                </Button>
+                </button>
               </div>
             )
           ) : null}

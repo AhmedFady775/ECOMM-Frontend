@@ -36,13 +36,25 @@ function Navbar() {
   const { cart, userInfo } = state;
   const { dispatch: ctxDispatch } = useContext(Store);
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const openDrop = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(false);
+  const [anchorEl1, setAnchorEl1] = useState(false);
+
+  const openDrop = anchorEl;
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const openDrop1 = anchorEl1;
+  const handleClick1 = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(false);
+  };
+
+  const handleClose1 = () => {
+    setAnchorEl1(null);
   };
 
   //signout
@@ -210,9 +222,38 @@ function Navbar() {
             <Link className="flex mx-4 lg:mx-0" to="/">
               <p className="text-2xl md:text-3xl font-bold Robot">V2S</p>
             </Link>
-            <div className="hidden lg:flex flex-row ml-10 font-semibold Robot">
+            <div
+              onClick={handleClick1}
+              className="hidden lg:flex flex-row ml-10 font-semibold cursor-pointer hover:bg-[#f4f5f6] p-3 rounded-md"
+            >
               Categories <KeyboardArrowDown />
             </div>
+            <Menu
+              anchorEl={anchorEl1}
+              open={openDrop1}
+              onClose={handleClose1}
+              onClick={handleClose1}
+              PaperProps={{
+                elevation: 3,
+                sx: {
+                  width: 180,
+                  overflow: "visible",
+                  mt: 0,
+                },
+              }}
+            >
+              <Link to="/shop">
+                <MenuItem sx={{ py: 1.5 }}>Cameras</MenuItem>
+              </Link>
+
+              <Link to="/shop">
+                <MenuItem sx={{ py: 1.5 }}>Wires</MenuItem>
+              </Link>
+
+              <Link to="/shop">
+                <MenuItem sx={{ py: 1.5 }}>Devices</MenuItem>
+              </Link>
+            </Menu>
           </div>
           <div className="flex flex-row justify-end w-full lg:w-[50%] items-center h-12 text-[#7f8286] relative">
             <input
@@ -244,7 +285,7 @@ function Navbar() {
                       sx: {
                         width: 200,
                         overflow: "visible",
-                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        filter: "drop-shadow(0px 2px 2px rgba(0,0,0,0.32))",
                         mt: 2,
                         "&:before": {
                           content: '""',

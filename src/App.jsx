@@ -19,8 +19,9 @@ const ShippingAddressScreen = lazy(() =>
 const Checkout = lazy(() => import("./pages/Checkout/Checkout"));
 import Footer from "./components/footer";
 import ShopNav from "./components/ShopNav";
-import OrderScreen from "./pages/Shipping/OrderScreen";
 import PaymentMethodScreen from "./pages/Shipping/PaymentMethodScreen";
+const OrderScreen = lazy(() => import("./pages/Shipping/OrderScreen"));
+
 import PlaceOrderScreen from "./pages/Shipping/PlaceOrderScreen";
 import Payments from "./pages/User/Payments";
 import Profile from "./pages/User/Profile";
